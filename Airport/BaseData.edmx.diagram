@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c50a92ba7f9b473790e49f3cf7cc9bfe" Name="Diagram1">
+        <EntityTypeShape EntityType="BaseDataModel.Box_Offic" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseDataModel.Citys" Width="1.5" PointX="1.5" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseDataModel.Discounts" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseDataModel.Employees" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseDataModel.Flights" Width="1.5" PointX="3" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseDataModel.Gender" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseDataModel.Passengers" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseDataModel.Passport_deta" Width="1.5" PointX="8.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseDataModel.Planes" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseDataModel.Roles" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BaseDataModel.Routes" Width="1.5" PointX="0.75" PointY="15.875" IsExpanded="true" />
+        <AssociationConnector Association="BaseDataModel.FK_BoxOffic_Cashiers" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseDataModel.FK_BoxOffic_Discounts" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseDataModel.FK_BoxOffic_Flights" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseDataModel.FK_BoxOffic_Passengers" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseDataModel.FK_Routes_Citys" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseDataModel.FK_Routes_Citys1" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseDataModel.FK_Cashiers_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseDataModel.FK_Cashiers_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseDataModel.FK_Passport_deta_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseDataModel.FK_Flights_Planes" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseDataModel.FK_Flights_Routes" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseDataModel.FK_Passengers_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="BaseDataModel.FK_Passport_deta_Passengers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
