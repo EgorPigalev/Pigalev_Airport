@@ -218,6 +218,7 @@
       <DependentUpon>BaseData.edmx</DependentUpon>
       <LastGenOutput>BaseData.cs</LastGenOutput>
     </Content>
+    <Resource Include="Пароли для входа.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

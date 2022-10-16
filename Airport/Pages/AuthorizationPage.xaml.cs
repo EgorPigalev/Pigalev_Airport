@@ -29,13 +29,25 @@ namespace Airport
         {
             int p = pbPassword.Password.GetHashCode();
             Employees employees = Base.BE.Employees.FirstOrDefault(x => x.login == tboxLogin.Text && x.password == p);
-            if(employees != null)
+            if(employees == null)
             {
-                Frameclass.MainFrame.Navigate(new MainMenuAdminPage());
+                MessageBox.Show("Пользователь с таким логиным и паролем не найден!");
             }
             else
             {
-                MessageBox.Show("Пользователь с таким логиным и паролем не найден!");
+                switch(employees.Roles.role)
+                {
+                    case "Администратор":
+                        MessageBox.Show("Привет, администратор");
+                        Frameclass.MainFrame.Navigate(new MainMenuAdminPage());
+                        break;
+                    case "Пользователь":
+                        MessageBox.Show("Привет, пользователь");
+                        break;  
+                    default:
+                        MessageBox.Show("");
+                        break;
+                }
             }
         }
 

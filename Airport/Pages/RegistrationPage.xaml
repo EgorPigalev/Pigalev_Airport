@@ -9,8 +9,7 @@
       Title="RegistrationPage" Background="#FFCFE8FF">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <StackPanel Width="100">
-            </StackPanel>
+            <StackPanel Width="100"/>
             <Border Background="White" Width="1000" CornerRadius="20, 0, 0, 20">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
@@ -27,38 +26,45 @@
                     </StackPanel>
                     <StackPanel Grid.Row="1" Margin="40,0,40,0" HorizontalAlignment="Center">
                         <StackPanel Orientation="Horizontal">
-                            <GroupBox Header="Фамилия" FontSize="24" Width="300">
-                                <TextBox x:Name="tbSurname"/>
+                            <GroupBox Header="Фамилия*" Style="{StaticResource ResourceKey=GBRegistration}">
+                                <TextBox x:Name="tbSurname" MaxLength="50"/>
                             </GroupBox>
-                            <GroupBox Header="Имя" FontSize="24" Width="300">
-                                <TextBox x:Name="tbName"/>
+                            <GroupBox Header="Имя*" Style="{StaticResource ResourceKey=GBRegistration}">
+                                <TextBox x:Name="tbName" MaxLength="50"/>
                             </GroupBox>
-                            <GroupBox Header="Отчество" FontSize="24" Width="300">
-                                <TextBox x:Name="tbPatronomic"/>
+                            <GroupBox Header="Отчество*" Style="{StaticResource ResourceKey=GBRegistration}">
+                                <TextBox x:Name="tbPatronomic" MaxLength="50"/>
                             </GroupBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <GroupBox Header="Пол" FontSize="24" Width="300">
+                            <GroupBox Header="Пол*" Style="{StaticResource ResourceKey=GBRegistration}">
                                 <ComboBox x:Name="cbGender"/>
                             </GroupBox>
-                            <GroupBox Header="Дата рождения" FontSize="24" Width="300">
+                            <GroupBox Header="Дата рождения*" Style="{StaticResource ResourceKey=GBRegistration}">
                                 <DatePicker x:Name="dpBrithday"/>
                             </GroupBox>
-                            <GroupBox Header="Телефон" FontSize="24" Width="300">
-                                <TextBox x:Name="tbPhone" PreviewTextInput="tbPhone_PreviewTextInput"/>
+                            <GroupBox Header="Телефон" Style="{StaticResource ResourceKey=GBRegistration}">
+                                <TextBox x:Name="tbPhone" PreviewTextInput="tbPhone_PreviewTextInput" MaxLength="16"/>
                             </GroupBox>
                         </StackPanel>
-                        <GroupBox Header="Логин" FontSize="24" Width="900">
-                            <TextBox x:Name="tbLogin"/>
+                        <GroupBox Header="Логин*" FontSize="24" Width="900">
+                            <TextBox x:Name="tbLogin" MaxLength="50"/>
                         </GroupBox>
                         <StackPanel Orientation="Horizontal">
-                            <GroupBox Header="Пароль" FontSize="24" Width="450">
-                                <PasswordBox x:Name="pbPassword"/>
+                            <GroupBox Header="Пароль*" Style="{StaticResource ResourceKey=GBRegistrationPassword}">
+                                <PasswordBox x:Name="pbPassword">
+                                    <PasswordBox.ToolTip>
+                                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" Width="400">
+                                            Введенный пароль должен удовлетворять следующим требованиям: не менее 1 заглавного латинского символа, не менее 3 строчных латинских символов, не менее 2 цифры и не менее 1 спец. символа. Общая длина пароля не менее 8 символов
+                                        </TextBlock>
+                                    </PasswordBox.ToolTip>
+                                </PasswordBox>
                             </GroupBox>
-                            <GroupBox Header="Повторный пароль" FontSize="24" Width="450">
+                            <GroupBox Header="Повторный пароль*" Style="{StaticResource ResourceKey=GBRegistrationPassword}">
                                 <PasswordBox x:Name="pbPasswordRepeated"/>
                             </GroupBox>
                         </StackPanel>
+                        <TextBlock FontSize="18" HorizontalAlignment="Center">* - поля обязательные к заполнению</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Margin="40,0,40,0" HorizontalAlignment="Center">
                         <Button x:Name="BtnRegistration" Content="Зарегистироваться" Click="BtnRegistration_Click" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnAuthorizationAndRegistration}" Cursor="Hand"/>

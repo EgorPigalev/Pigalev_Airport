@@ -14,12 +14,9 @@
                 <Setter Property="Margin" Value="10"/>
                 <Setter Property="Background">
                     <Setter.Value>
-                        <LinearGradientBrush StartPoint="1,1" EndPoint="0.5, 0">
-                            <GradientStop Color="#FF90C7F9" Offset="1"/>
-                            <GradientStop Color="#FF71B2ED" Offset="0.8"/>
-                            <GradientStop Color="#FF60AAED" Offset="0.4"/>
-                            <GradientStop Color="#FF4797E0" Offset="0.1"/>
-                            <GradientStop Color="#FF0D61AD" Offset="0"/>
+                        <LinearGradientBrush StartPoint="1, 1" EndPoint="0, 0">
+                            <GradientStop Color="#FF28C1F2" Offset="1"/>
+                            <GradientStop Color="#FF63B1F3" Offset="0.1"/>
                         </LinearGradientBrush>
                     </Setter.Value>
                 </Setter>
@@ -28,16 +25,7 @@
             </Style.Setters>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <LinearGradientBrush StartPoint="1,1" EndPoint="0.5, 0">
-                                <GradientStop Color="#FF90C7F9" Offset="1"/>
-                                <GradientStop Color="#FF71B2ED" Offset="0.8"/>
-                                <GradientStop Color="#FF60AAED" Offset="0.4"/>
-                                <GradientStop Color="#FF0D61AD" Offset="0.1"/>
-                                <GradientStop Color="#FF0D61AD" Offset="0"/>
-                            </LinearGradientBrush>
-                        </Setter.Value>
+                    <Setter Property="Background" Value="#FF28C1F2">
                     </Setter>
                 </Trigger>
                 <Trigger Property="IsMouseCaptured" Value="True">
@@ -52,7 +40,7 @@
             </Style.Setters>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="#FF073886"/>
+                    <Setter Property="Foreground" Value="#FF63B1F3"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -68,6 +56,18 @@
                 <Setter Property="Width" Value="300"/>
                 <Setter Property="Height" Value="60"/>
                 <Setter Property="FontSize" Value="30"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="GBRegistration" TargetType="GroupBox">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="Width" Value="300"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="GBRegistrationPassword" TargetType="GroupBox">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="Width" Value="450"/>
             </Style.Setters>
         </Style>
     </Application.Resources>

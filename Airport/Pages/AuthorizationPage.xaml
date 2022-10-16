@@ -29,7 +29,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="1" Margin="40,0,40,0">
                         <GroupBox Header="Введите логин" FontSize="28">
-                            <TextBox x:Name="tboxLogin"/>
+                            <TextBox x:Name="tboxLogin" MaxLength="50"/>
                         </GroupBox>
                         <GroupBox Header="Введите пароль" FontSize="28">
                             <PasswordBox x:Name="pbPassword"/>

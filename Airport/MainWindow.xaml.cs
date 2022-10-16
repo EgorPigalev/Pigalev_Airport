@@ -20,6 +20,11 @@ namespace Airport
     /// </summary>
     public partial class MainWindow : Window
     {
+        /*
+        Пользователь для входа под администратором:
+        Логин: EgorAdmin
+        Пароль: Admin11!
+         */
         public MainWindow()
         {
             InitializeComponent();
