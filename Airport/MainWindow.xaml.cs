@@ -25,7 +25,7 @@ namespace Airport
             InitializeComponent();
             Frameclass.MainFrame = fMain;
             Frameclass.MainFrame.Navigate(new MainPage());
-            Base.BE = new BaseEntities();
+            Base.BE = new BaseDataEntities();
         }
     }
 }

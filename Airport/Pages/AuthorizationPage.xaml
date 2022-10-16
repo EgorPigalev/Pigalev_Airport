@@ -32,7 +32,7 @@
                             <TextBox x:Name="tboxLogin"/>
                         </GroupBox>
                         <GroupBox Header="Введите пароль" FontSize="28">
-                            <PasswordBox x:Name="tboxPassword"/>
+                            <PasswordBox x:Name="pbPassword"/>
                         </GroupBox>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Margin="40,0,40,0" HorizontalAlignment="Center">

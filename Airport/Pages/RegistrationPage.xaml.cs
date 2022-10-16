@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Text.RegularExpressions;
+using System.Runtime.Remoting.Lifetime;
 
 namespace Airport
 {
@@ -35,51 +36,89 @@ namespace Airport
             Frameclass.MainFrame.Navigate(new AuthorizationPage());
         }
 
+        bool GetProverkaParol()
+        {
+            Employees employees = Base.BE.Employees.FirstOrDefault(x => x.login == tbLogin.Text);
+            if (employees != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private void BtnRegistration_Click(object sender, RoutedEventArgs e)
         {
-            if(tbSurname.Text.Replace(" ", "") == "")
+            if (tbSurname.Text.Replace(" ", "") == "")
             {
                 MessageBox.Show("Поле фамилия должно быть заполнено!");
                 return;
             }
-            else if (tbName.Text.Replace(" ", "") == "")
+            if (tbName.Text.Replace(" ", "") == "")
             {
                 MessageBox.Show("Поле имя должно быть заполнено!");
                 return;
             }
-            else if (tbPatronomic.Text.Replace(" ", "") == "")
+            if (tbPatronomic.Text.Replace(" ", "") == "")
             {
                 MessageBox.Show("Поле Отчество должно быть заполнено!");
                 return;
             }
-            else if (cbGender.Text.Replace(" ", "") == "")
+            if (cbGender.Text == "")
             {
                 MessageBox.Show("Поле пол должно быть заполнено!");
                 return;
             }
-            else if (dpBrithday.Text.Replace(" ", "") == "")
+            if (dpBrithday.Text == "")
             {
                 MessageBox.Show("Поле дата рождения должно быть заполнено!");
                 return;
             }
-            else if (tbLogin.Text.Replace(" ", "") == "")
+            if (tbLogin.Text.Replace(" ", "") == "")
             {
                 MessageBox.Show("Поле логин должно быть заполнено!");
                 return;
             }
-            else if (pbPassword.ToString().Replace(" ", "") == "")
+            Regex regexCapitalLatinCharacter = new Regex("(?=.*[A-Z])"); // Регулярное выражение для проверки наличия 1 заглавного латинского символа
+            if (regexCapitalLatinCharacter.IsMatch(pbPassword.Password.ToString()) == false)
             {
-                MessageBox.Show("Поле пароль должно быть заполнено!");
+                MessageBox.Show("Пароль должен содержать не менее 1 заглавного латинского символа");
                 return;
             }
-            else if (pbPassword.ToString() != pbPasswordRepeated.ToString())
+            Regex regexAtLeastCharacters = new Regex("(?=.*[a-z].*[a-z].*[a-z])"); // Регулярное выражение для проверки наличия 3 строчных латинских символов
+            if (regexAtLeastCharacters.IsMatch(pbPassword.Password.ToString()) == false)
+            {
+                MessageBox.Show("Пароль должен содержать не менее 3 строчных латинских символов");
+                return;
+            }
+            Regex regexAtLeastDigits = new Regex("(?=.*[0-9].*[0-9])"); // Регулярное выражение для проверки наличия 2 цифр
+            if (regexAtLeastDigits.IsMatch(pbPassword.Password.ToString()) == false)
+            {
+                MessageBox.Show("Пароль должен содержать не менее не менее 2 цифр");
+                return;
+            }
+            Regex regexSpecialСharacter = new Regex("(?=.*[!@#$&*])"); // Регулярное выражение для проверки наличия 1 спец. символа
+            if (regexSpecialСharacter.IsMatch(pbPassword.Password.ToString()) == false)
+            {
+                MessageBox.Show("Пароль должен содержать не менее  не менее 1 спец. символа");
+                return;
+            }
+            Regex regexLength = new Regex(".{8,}"); // Регулярное выражение для проверки длины пароля
+            if (regexSpecialСharacter.IsMatch(pbPassword.Password.ToString()) == false)
+            {
+                MessageBox.Show("Общая длина пароля должна быть не менее 8 символов");
+                return;
+            }
+            if (pbPassword.Password.ToString() != pbPasswordRepeated.Password.ToString())
             {
                 MessageBox.Show("Пароль не подтверждён!");
                 return;
             }
-            else if (pbPassword.ToString() != pbPasswordRepeated.ToString())
+            if(GetProverkaParol() == true)
             {
-                MessageBox.Show("Пароль не подтверждён!");
+                MessageBox.Show("Пользователь с таким логиным уже зарегистрирован!");
                 return;
             }
             Employees employee = new Employees()
@@ -91,13 +130,20 @@ namespace Airport
                 date_of_birth = Convert.ToDateTime(dpBrithday.SelectedDate),
                 phone = tbPhone.Text,
                 login = tbLogin.Text,
-                password = Convert.ToString(pbPassword.Password.GetHashCode()),
+                password = pbPassword.Password.GetHashCode(),
                 id_role = 2
             };
             Base.BE.Employees.Add(employee);
             Base.BE.SaveChanges();
             MessageBox.Show("Вы успешно зарегистрировались");
             Frameclass.MainFrame.Navigate(new AuthorizationPage());
+        }
+        private void tbPhone_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!Char.IsDigit(e.Text, 0))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

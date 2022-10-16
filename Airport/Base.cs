@@ -8,6 +8,6 @@ namespace Airport
 {
     class Base
     {
-        public static BaseEntities BE;
+        public static BaseDataEntities BE;
     }
 }

@@ -27,8 +27,16 @@ namespace Airport
 
         private void BtnAutorization_Click(object sender, RoutedEventArgs e)
         {
-            Frameclass.MainFrame.Navigate(new MainMenuPage());
-
+            int p = pbPassword.Password.GetHashCode();
+            Employees employees = Base.BE.Employees.FirstOrDefault(x => x.login == tboxLogin.Text && x.password == p);
+            if(employees != null)
+            {
+                Frameclass.MainFrame.Navigate(new MainMenuAdminPage());
+            }
+            else
+            {
+                MessageBox.Show("Пользователь с таким логиным и паролем не найден!");
+            }
         }
 
         private void TBNextRegistration_PreviewMouseDown(object sender, MouseButtonEventArgs e)

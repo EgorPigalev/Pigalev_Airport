@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Airport
 {
     /// <summary>
-    /// Логика взаимодействия для MainMenuPage.xaml
+    /// Логика взаимодействия для MainMenuAdminPage.xaml
     /// </summary>
-    public partial class MainMenuPage : Page
+    public partial class MainMenuAdminPage : Page
     {
-        public MainMenuPage()
+        public MainMenuAdminPage()
         {
             InitializeComponent();
         }

@@ -98,8 +98,8 @@
     <Compile Include="Gender.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MainMenuPage.xaml.cs">
-      <DependentUpon>MainMenuPage.xaml</DependentUpon>
+    <Compile Include="Pages\MainMenuAdminPage.xaml.cs">
+      <DependentUpon>MainMenuAdminPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
@@ -119,7 +119,7 @@
     <Compile Include="Routes.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
-    <Page Include="Pages\MainMenuPage.xaml">
+    <Page Include="Pages\MainMenuAdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

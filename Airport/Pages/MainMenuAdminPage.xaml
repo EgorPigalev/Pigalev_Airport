@@ -1,4 +1,4 @@
-﻿<Page x:Class="Airport.MainMenuPage"
+﻿<Page x:Class="Airport.MainMenuAdminPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Airport"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainMenuPage">
+      Title="MainMenuAdminPage">
 
     <Grid>
         

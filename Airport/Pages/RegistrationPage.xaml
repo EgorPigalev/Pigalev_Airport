@@ -45,7 +45,7 @@
                                 <DatePicker x:Name="dpBrithday"/>
                             </GroupBox>
                             <GroupBox Header="Телефон" FontSize="24" Width="300">
-                                <TextBox x:Name="tbPhone"/>
+                                <TextBox x:Name="tbPhone" PreviewTextInput="tbPhone_PreviewTextInput"/>
                             </GroupBox>
                         </StackPanel>
                         <GroupBox Header="Логин" FontSize="24" Width="900">

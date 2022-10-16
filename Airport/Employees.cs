@@ -28,7 +28,7 @@ namespace Airport
         public System.DateTime date_of_birth { get; set; }
         public string phone { get; set; }
         public string login { get; set; }
-        public string password { get; set; }
+        public int password { get; set; }
         public int id_role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
