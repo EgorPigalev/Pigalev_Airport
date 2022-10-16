@@ -98,13 +98,13 @@ namespace Airport
                 Regex regexAtLeastDigits = new Regex("(?=.*[0-9].*[0-9])"); // Регулярное выражение для проверки наличия 2 цифр
                 if (regexAtLeastDigits.IsMatch(pbPassword.Password.ToString()) == false)
                 {
-                    MessageBox.Show("Пароль должен содержать не менее не менее 2 цифр");
+                    MessageBox.Show("Пароль должен содержать не менее 2 цифр");
                     return;
                 }
                 Regex regexSpecialСharacter = new Regex("(?=.*[!@#$&*])"); // Регулярное выражение для проверки наличия 1 спец. символа
                 if (regexSpecialСharacter.IsMatch(pbPassword.Password.ToString()) == false)
                 {
-                    MessageBox.Show("Пароль должен содержать не менее  не менее 1 спец. символа");
+                    MessageBox.Show("Пароль должен содержать не менее 1 спец. символа");
                     return;
                 }
                 Regex regexLength = new Regex(".{8,}"); // Регулярное выражение для проверки длины пароля
@@ -147,7 +147,7 @@ namespace Airport
         }
         private void tbPhone_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (!(Char.IsDigit(e.Text, 0) || (e.Text == "(") || (e.Text == ")") || (e.Text == "+")))
+            if (!(Char.IsDigit(e.Text, 0) || (e.Text == "(") || (e.Text == ")") || (e.Text == "+") || (e.Text == "-")))
             {
                 e.Handled = true;
             }

@@ -70,5 +70,12 @@
                 <Setter Property="Width" Value="450"/>
             </Style.Setters>
         </Style>
+        <Style x:Key="btnMainButton" TargetType="Button" BasedOn="{StaticResource BtnStyle}">
+            <Style.Setters>
+                <Setter Property="Width" Value="150"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="FontSize" Value="20"/>
+            </Style.Setters>
+        </Style>
     </Application.Resources>
 </Application>

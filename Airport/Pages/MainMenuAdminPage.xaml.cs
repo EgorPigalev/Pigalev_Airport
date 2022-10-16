@@ -20,9 +20,23 @@ namespace Airport
     /// </summary>
     public partial class MainMenuAdminPage : Page
     {
+        public static string LoginUser; // Логин пользователя который вошёл в систему
         public MainMenuAdminPage()
         {
             InitializeComponent();
+            tbRoleUser.Text = tbRoleUser.Text + " Администратор";
+            Employees user = Base.BE.Employees.FirstOrDefault(x => x.login == LoginUser);
+            tbFIOUser.Text = user.surname + " " + user.name[0] + ". " + user.patronomic[0] + ".";
+        }
+
+        private void btnSeeUsers_Click(object sender, RoutedEventArgs e)
+        {
+            Frameclass.MainFrame.Navigate(new SeeUsers());
+        }
+
+        private void btnExitMainMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Frameclass.MainFrame.Navigate(new MainPage());
         }
     }
 }

@@ -5,10 +5,29 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Airport"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="MainMenuAdminPage">
-
+      d:DesignHeight="620" d:DesignWidth="1100"
+      Title="MainMenuAdminPage" Background="White" Margin="20">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+        </Grid.RowDefinitions>
         
+        <StackPanel Grid.Row="0" Orientation="Vertical">
+            <TextBlock HorizontalAlignment="Center" FontSize="35">Главное меню</TextBlock>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <Image Height="70" Width="70" Source="../Resources/icon_user.png"/>
+                <TextBlock x:Name="tbFIOUser" Grid.Row="0" FontSize="30" VerticalAlignment="Center" Margin="10, 0, 0, 0">Фамилия И.О.</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="btnSeeUsers" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnAuthorizationAndRegistration}" Click="btnSeeUsers_Click" Cursor="Hand">Пользователи</Button>
+                </StackPanel>
+                <Button x:Name="btnExitMainMenu" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnStyle}" Click="btnExitMainMenu_Click" Cursor="Hand" Height="60" Width="400" FontSize="30" HorizontalAlignment="Left">Выйти из учетной записи</Button>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <TextBlock x:Name="tbRoleUser" FontSize="20">Вы вошли как:</TextBlock>
+        </StackPanel>
     </Grid>
 </Page>

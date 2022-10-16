@@ -36,7 +36,7 @@
                         </GroupBox>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Margin="40,0,40,0" HorizontalAlignment="Center">
-                        <Button x:Name="BtnAutorization" Content="Авторизироваться" Click="BtnAutorization_Click" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnAuthorizationAndRegistration}"/>
+                        <Button x:Name="BtnAutorization" Content="Авторизироваться" Click="BtnAutorization_Click" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnAuthorizationAndRegistration}" Cursor="Hand"/>
                         <TextBlock x:Name="TBNextRegistration" PreviewMouseDown="TBNextRegistration_PreviewMouseDown" Style="{StaticResource ResourceKey=TBNextRegistration}">Ещё не зарегистрированы?</TextBlock>
                     </StackPanel>
                 </Grid>

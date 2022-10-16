@@ -119,6 +119,9 @@
     <Compile Include="Routes.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SeeUsers.xaml.cs">
+      <DependentUpon>SeeUsers.xaml</DependentUpon>
+    </Compile>
     <Page Include="Pages\MainMenuAdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,6 +154,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SeeUsers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -218,6 +225,7 @@
       <DependentUpon>BaseData.edmx</DependentUpon>
       <LastGenOutput>BaseData.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\icon_user.png" />
     <Resource Include="Пароли для входа.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
