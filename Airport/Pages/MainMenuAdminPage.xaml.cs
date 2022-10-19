@@ -38,5 +38,10 @@ namespace Airport
         {
             Frameclass.MainFrame.Navigate(new MainPage());
         }
+
+        private void btnSeeTickets_Click(object sender, RoutedEventArgs e)
+        {
+            Frameclass.MainFrame.Navigate(new ListOfTickets());
+        }
     }
 }

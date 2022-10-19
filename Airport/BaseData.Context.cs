@@ -25,6 +25,7 @@ namespace Airport
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ApplicationOfDiscounts> ApplicationOfDiscounts { get; set; }
         public virtual DbSet<Box_Offic> Box_Offic { get; set; }
         public virtual DbSet<Citys> Citys { get; set; }
         public virtual DbSet<Discounts> Discounts { get; set; }

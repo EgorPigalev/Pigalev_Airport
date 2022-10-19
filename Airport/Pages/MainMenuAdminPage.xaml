@@ -22,6 +22,7 @@
             <StackPanel Orientation="Vertical" Margin="10">
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="btnSeeUsers" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnAuthorizationAndRegistration}" Click="btnSeeUsers_Click" Cursor="Hand">Пользователи</Button>
+                    <Button x:Name="btnSeeTickets" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnAuthorizationAndRegistration}" Click="btnSeeTickets_Click" Cursor="Hand">Купленные билеты</Button>
                 </StackPanel>
                 <Button x:Name="btnExitMainMenu" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnStyle}" Click="btnExitMainMenu_Click" Cursor="Hand" Height="60" Width="400" FontSize="30" HorizontalAlignment="Left">Выйти из учетной записи</Button>
             </StackPanel>

@@ -14,6 +14,12 @@ namespace Airport
     
     public partial class Box_Offic
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Box_Offic()
+        {
+            this.ApplicationOfDiscounts = new HashSet<ApplicationOfDiscounts>();
+        }
+    
         public int id_ticket { get; set; }
         public int id_flight { get; set; }
         public int id_employee { get; set; }
@@ -21,8 +27,9 @@ namespace Airport
         public Nullable<int> id_discount { get; set; }
         public System.DateTime date_of_sale { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ApplicationOfDiscounts> ApplicationOfDiscounts { get; set; }
         public virtual Employees Employees { get; set; }
-        public virtual Discounts Discounts { get; set; }
         public virtual Flights Flights { get; set; }
         public virtual Passengers Passengers { get; set; }
     }

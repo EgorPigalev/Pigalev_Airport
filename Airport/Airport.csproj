@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ApplicationOfDiscounts.cs">
+      <DependentUpon>BaseData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Base.cs" />
     <Compile Include="BaseData.Context.cs">
       <AutoGen>True</AutoGen>
@@ -98,6 +101,9 @@
     <Compile Include="Gender.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ListOfTickets.xaml.cs">
+      <DependentUpon>ListOfTickets.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\MainMenuAdminPage.xaml.cs">
       <DependentUpon>MainMenuAdminPage.xaml</DependentUpon>
     </Compile>
@@ -122,6 +128,10 @@
     <Compile Include="Pages\SeeUsers.xaml.cs">
       <DependentUpon>SeeUsers.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pages\ListOfTickets.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\MainMenuAdminPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

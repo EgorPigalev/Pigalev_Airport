@@ -12,19 +12,13 @@ namespace Airport
     using System;
     using System.Collections.Generic;
     
-    public partial class Discounts
+    public partial class ApplicationOfDiscounts
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Discounts()
-        {
-            this.ApplicationOfDiscounts = new HashSet<ApplicationOfDiscounts>();
-        }
-    
+        public int id_application_discounts { get; set; }
+        public int id_ticket { get; set; }
         public int id_discount { get; set; }
-        public string description { get; set; }
-        public double value { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApplicationOfDiscounts> ApplicationOfDiscounts { get; set; }
+        public virtual Box_Offic Box_Offic { get; set; }
+        public virtual Discounts Discounts { get; set; }
     }
 }
