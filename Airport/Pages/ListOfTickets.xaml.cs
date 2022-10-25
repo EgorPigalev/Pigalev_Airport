@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Net.WebRequestMethods;
 
 namespace Airport
 {
@@ -29,6 +31,38 @@ namespace Airport
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
             Frameclass.MainFrame.Navigate(new MainMenuAdminPage());
+        }
+
+        private void tbDiscounts_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            int index = Convert.ToInt32(tb.Uid);
+            List<ApplicationOfDiscounts> AOD = Base.BE.ApplicationOfDiscounts.Where(x => x.id_ticket == index).ToList();
+            string str = "";
+            foreach (ApplicationOfDiscounts aod in AOD)
+            {
+                str += "\n" + aod.Discounts.description + " - " + aod.Discounts.value + " %";
+            }
+            if(str.Length > 0)
+            {
+                tb.Text = "Применённые скидки: " + str;
+            }
+        }
+
+        private void tbCost_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            int index = Convert.ToInt32(tb.Uid);
+            double summDiscounts = 0; // Сумма всех скидок
+            List<ApplicationOfDiscounts> AOD = Base.BE.ApplicationOfDiscounts.Where(x => x.id_ticket == index).ToList();
+            foreach (ApplicationOfDiscounts aod in AOD)
+            {
+                summDiscounts += aod.Discounts.value;
+            }
+            Box_Offic box_Offic = Base.BE.Box_Offic.FirstOrDefault(x => x.id_ticket == index);
+            Flights flights = Base.BE.Flights.FirstOrDefault(x => x.id_flight == box_Offic.id_flight);
+            double cost = flights.cost - (flights.cost / 100 * summDiscounts);
+            tb.Text = cost + " руб.";
         }
     }
 }

@@ -21,7 +21,6 @@
           <Property Name="id_flight" Type="int" Nullable="false" />
           <Property Name="id_employee" Type="int" Nullable="false" />
           <Property Name="id_passenger" Type="int" Nullable="false" />
-          <Property Name="id_discount" Type="int" />
           <Property Name="date_of_sale" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Citys">
@@ -450,7 +449,6 @@
           <Property Name="id_flight" Type="Int32" Nullable="false" />
           <Property Name="id_employee" Type="Int32" Nullable="false" />
           <Property Name="id_passenger" Type="Int32" Nullable="false" />
-          <Property Name="id_discount" Type="Int32" />
           <Property Name="date_of_sale" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="ApplicationOfDiscounts" Relationship="BaseDataModel.FK_ApplicationOfDiscounts_Box_Offic" FromRole="Box_Offic" ToRole="ApplicationOfDiscounts" />
           <NavigationProperty Name="Employees" Relationship="BaseDataModel.FK_BoxOffic_Cashiers" FromRole="Box_Offic" ToRole="Employees" />
@@ -743,7 +741,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -762,7 +760,6 @@
             <EntityTypeMapping TypeName="BaseDataModel.Box_Offic">
               <MappingFragment StoreEntitySet="Box_Offic">
                 <ScalarProperty Name="date_of_sale" ColumnName="date_of_sale" />
-                <ScalarProperty Name="id_discount" ColumnName="id_discount" />
                 <ScalarProperty Name="id_passenger" ColumnName="id_passenger" />
                 <ScalarProperty Name="id_employee" ColumnName="id_employee" />
                 <ScalarProperty Name="id_flight" ColumnName="id_flight" />

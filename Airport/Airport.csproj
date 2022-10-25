@@ -67,7 +67,7 @@
     <Compile Include="ApplicationOfDiscounts.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
-    <Compile Include="Base.cs" />
+    <Compile Include="Classes\Base.cs" />
     <Compile Include="BaseData.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -155,7 +155,7 @@
     <Compile Include="Pages\AuthorizationPage.xaml.cs">
       <DependentUpon>AuthorizationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Frameclass.cs" />
+    <Compile Include="Classes\Frameclass.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -235,8 +235,11 @@
       <DependentUpon>BaseData.edmx</DependentUpon>
       <LastGenOutput>BaseData.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\icon_people.png" />
+    <Resource Include="Resources\icon_date_time.png" />
+    <Resource Include="Resources\icon_route.png" />
     <Resource Include="Resources\icon_user.png" />
-    <Resource Include="Пароли для входа.txt" />
+    <Resource Include="Resources\Пароли для входа.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -24,7 +24,6 @@ namespace Airport
         public int id_flight { get; set; }
         public int id_employee { get; set; }
         public int id_passenger { get; set; }
-        public Nullable<int> id_discount { get; set; }
         public System.DateTime date_of_sale { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

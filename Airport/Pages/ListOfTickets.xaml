@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Airport"
       mc:Ignorable="d" 
       d:DesignHeight="620" d:DesignWidth="1100"
-      Title="ListOfTickets" Background="White" Margin="20">
+      Title="ListOfTickets" Background="White" Margin="10" FontSize="18">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"></RowDefinition>
@@ -17,18 +17,56 @@
             <TextBlock HorizontalAlignment="Center" FontSize="35">Список купленных билетов</TextBlock>
         </StackPanel>
         <StackPanel Grid.Row="1">
-            <ListView x:Name="lvListTickets">
+            <ListView x:Name="lvListTickets" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Border Padding="5" CornerRadius="5" BorderThickness="1" BorderBrush="#445c93">
-                            <Grid Width="400" Height="150">
+                        <Border Padding="5" CornerRadius="20" BorderThickness="1" BorderBrush="#445c93">
+                            <Grid Width="350" Height="350">
                                 <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Flights.Routes.Citys.city}" FontSize="16"/>
-                                        <TextBlock Text="{Binding Flights.Routes.Citys1.city, StringFormat= - {0}}" FontSize="16"/>
+                                    <TextBlock Text="Билет на самолёт" HorizontalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal" Margin="5">
+                                        <Image Height="50" Width="50" Source="../Resources/icon_route.png" Margin="0, 0, 20, 0"/>
+                                        <StackPanel Orientation="Vertical" Margin="0, 0, 20, 0">
+                                            <TextBlock Text="От" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Flights.Routes.Citys.city}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Margin="0, 0, 20, 0">
+                                            <TextBlock Text="До" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Flights.Routes.Citys1.city}"/>
+                                        </StackPanel>
                                     </StackPanel>
-                                    
-                                    <TextBlock Text="{Binding Employees.surname}" FontSize="16"/>
+                                    <StackPanel Orientation="Horizontal" Margin="5">
+                                        <Image Height="50" Width="50" Source="../Resources/icon_date_time.png" Margin="0, 0, 20, 0"/>
+                                        <StackPanel Orientation="Vertical" Margin="0, 0, 20, 0">
+                                            <TextBlock Text="Дата" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Flights.departure_date, StringFormat={}dd.MM.yyyy}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Margin="0, 0, 20, 0">
+                                            <TextBlock Text="Время" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Flights.departure_time, StringFormat=hhmm}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="5">
+                                        <Image Height="50" Width="50" Source="../Resources/icon_people.png" Margin="0, 0, 20, 0"/>
+                                        <StackPanel Orientation="Vertical" Margin="0, 0, 20, 0">
+                                            <TextBlock Text="Пассажир" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Passengers.surname}"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" Margin="0, 0, 20, 0">
+                                            <TextBlock Text="Кассир" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Employees.surname}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="5" >
+                                        <TextBlock Text="Цена: " FontSize="22" FontWeight="Bold"/>
+                                        <TextBlock Uid="{Binding id_ticket}" Name="tbCost" Loaded="tbCost_Loaded" FontSize="22"></TextBlock>
+                                    </StackPanel>
+                                    <TextBlock Uid="{Binding id_ticket}" Name="tbDiscounts" Loaded="tbDiscounts_Loaded" FontSize="16" Foreground="Red"></TextBlock>
                                 </StackPanel>
                             </Grid>
                         </Border>

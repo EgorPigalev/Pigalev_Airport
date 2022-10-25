@@ -5,11 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Airport"
       mc:Ignorable="d" 
-      d:DesignHeight="620" d:DesignWidth="1100"
+      d:DesignHeight="720" d:DesignWidth="1200"
       Title="AuthorizationPage" Background="#FFCFE8FF">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <StackPanel VerticalAlignment="Center" Width="400" Orientation="Vertical">
+            <StackPanel VerticalAlignment="Center" Width="500" Orientation="Vertical">
                 <TextBlock FontSize="35" TextWrapping="Wrap" TextAlignment="Center">Мы рады видеть вас</TextBlock>
                 <Image Height="400" Width="400" Source="../Resources/autorization.png"/>
             </StackPanel>
@@ -20,8 +20,8 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"></RowDefinition>
-                        <RowDefinition Height="2*"></RowDefinition>
-                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Image Height="70" Width="70" Source="../Resources/autorization_logo.png"/>

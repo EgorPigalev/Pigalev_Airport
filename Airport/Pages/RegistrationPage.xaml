@@ -5,11 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Airport"
       mc:Ignorable="d" 
-      d:DesignHeight="620" d:DesignWidth="1100"
+      d:DesignHeight="720" d:DesignWidth="1200"
       Title="RegistrationPage" Background="#FFCFE8FF">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <StackPanel Width="100"/>
+            <StackPanel Width="200"/>
             <Border Background="White" Width="1000" CornerRadius="20, 0, 0, 20">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
@@ -25,7 +25,7 @@
                         <TextBlock Grid.Row="0" FontSize="35" VerticalAlignment="Center">Регистрация</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Margin="40,0,40,0" HorizontalAlignment="Center">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" Margin="0, 5">
                             <GroupBox Header="Фамилия*" Style="{StaticResource ResourceKey=GBRegistration}">
                                 <TextBox x:Name="tbSurname" MaxLength="50"/>
                             </GroupBox>
@@ -36,7 +36,7 @@
                                 <TextBox x:Name="tbPatronomic" MaxLength="50"/>
                             </GroupBox>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal"  Margin="0, 5">
                             <GroupBox Header="Пол*" Style="{StaticResource ResourceKey=GBRegistration}">
                                 <ComboBox x:Name="cbGender"/>
                             </GroupBox>
@@ -47,10 +47,10 @@
                                 <TextBox x:Name="tbPhone" PreviewTextInput="tbPhone_PreviewTextInput" MaxLength="16"/>
                             </GroupBox>
                         </StackPanel>
-                        <GroupBox Header="Логин*" FontSize="24" Width="900">
+                        <GroupBox Header="Логин*" FontSize="24" Width="900"  Margin="0, 5">
                             <TextBox x:Name="tbLogin" MaxLength="50"/>
                         </GroupBox>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal"  Margin="0, 5">
                             <GroupBox Header="Пароль*" Style="{StaticResource ResourceKey=GBRegistrationPassword}">
                                 <PasswordBox x:Name="pbPassword">
                                     <PasswordBox.ToolTip>
@@ -64,7 +64,7 @@
                                 <PasswordBox x:Name="pbPasswordRepeated"/>
                             </GroupBox>
                         </StackPanel>
-                        <TextBlock FontSize="18" HorizontalAlignment="Center">* - поля обязательные к заполнению</TextBlock>
+                        <TextBlock FontSize="18" HorizontalAlignment="Center"  Margin="0, 5">* - поля обязательные к заполнению</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Margin="40,0,40,0" HorizontalAlignment="Center">
                         <Button x:Name="BtnRegistration" Content="Зарегистироваться" Click="BtnRegistration_Click" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnAuthorizationAndRegistration}" Cursor="Hand"/>
