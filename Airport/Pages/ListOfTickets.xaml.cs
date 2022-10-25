@@ -64,5 +64,18 @@ namespace Airport
             double cost = flights.cost - (flights.cost / 100 * summDiscounts);
             tb.Text = cost + " руб.";
         }
+
+        private void tbDeparturePoint_Loaded(object sender, RoutedEventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            int index = Convert.ToInt32(tb.Uid);
+            Citys city = Base.BE.Citys.FirstOrDefault(x => x.id_city == index);
+            tb.Text = city.city;
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

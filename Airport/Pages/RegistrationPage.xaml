@@ -5,11 +5,11 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Airport"
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1200"
+      d:DesignHeight="720" d:DesignWidth="1250"
       Title="RegistrationPage" Background="#FFCFE8FF">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <StackPanel Width="200"/>
+            <StackPanel Width="250"/>
             <Border Background="White" Width="1000" CornerRadius="20, 0, 0, 20">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="30" Color="LightGray" ShadowDepth="0"/>
