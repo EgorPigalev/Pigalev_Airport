@@ -18,15 +18,25 @@ namespace Airport
     /// <summary>
     /// Логика взаимодействия для MainMenuAdminPage.xaml
     /// </summary>
-    public partial class MainMenuAdminPage : Page
+    public partial class MainMenuPage : Page
     {
         public static string LoginUser; // Логин пользователя который вошёл в систему
-        public MainMenuAdminPage()
+        public MainMenuPage()
         {
             InitializeComponent();
-            tbRoleUser.Text = tbRoleUser.Text + " Администратор";
             Employees user = Base.BE.Employees.FirstOrDefault(x => x.login == LoginUser);
+            tbRoleUser.Text = tbRoleUser.Text + " " + user.Roles.role;
             tbFIOUser.Text = user.surname + " " + user.name[0] + ". " + user.patronomic[0] + ".";
+            if(user.Roles.role == "Пользователь")
+            {
+                btnSeeUsers.Visibility = Visibility.Collapsed;
+                btnSeeTickets.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                btnSeeUsers.Visibility = Visibility.Visible;
+                btnSeeTickets.Visibility = Visibility.Visible;
+            }
         }
 
         private void btnSeeUsers_Click(object sender, RoutedEventArgs e)

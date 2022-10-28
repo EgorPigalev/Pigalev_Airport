@@ -30,7 +30,7 @@ namespace Airport
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            Frameclass.MainFrame.Navigate(new MainMenuAdminPage());
+            Frameclass.MainFrame.Navigate(new MainMenuPage());
         }
 
         private void tbDiscounts_Loaded(object sender, RoutedEventArgs e)

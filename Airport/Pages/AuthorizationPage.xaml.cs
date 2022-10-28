@@ -38,11 +38,12 @@ namespace Airport
                 switch(employees.Roles.role)
                 {
                     case "Администратор":
-                        MainMenuAdminPage.LoginUser = employees.login;
-                        Frameclass.MainFrame.Navigate(new MainMenuAdminPage());
+                        MainMenuPage.LoginUser = employees.login;
+                        Frameclass.MainFrame.Navigate(new MainMenuPage());
                         break;
                     case "Пользователь":
-                        MessageBox.Show("Привет, пользователь");
+                        MainMenuPage.LoginUser = employees.login;
+                        Frameclass.MainFrame.Navigate(new MainMenuPage());
                         break;  
                     default:
                         MessageBox.Show("");

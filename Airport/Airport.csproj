@@ -104,8 +104,8 @@
     <Compile Include="Pages\ListOfTickets.xaml.cs">
       <DependentUpon>ListOfTickets.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\MainMenuAdminPage.xaml.cs">
-      <DependentUpon>MainMenuAdminPage.xaml</DependentUpon>
+    <Compile Include="Pages\MainMenuPage.xaml.cs">
+      <DependentUpon>MainMenuPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
@@ -133,7 +133,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\MainMenuAdminPage.xaml">
+    <Page Include="Pages\MainMenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -236,6 +236,8 @@
       <DependentUpon>BaseData.edmx</DependentUpon>
       <LastGenOutput>BaseData.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\color_night_flight.png" />
+    <Resource Include="Resources\color_day_flight.png" />
     <Resource Include="Resources\icon_people.png" />
     <Resource Include="Resources\icon_date_time.png" />
     <Resource Include="Resources\icon_route.png" />
