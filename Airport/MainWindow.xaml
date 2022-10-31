@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Airport"
         mc:Ignorable="d"
-        Title="АвиаРоссия" Height="800" MaxHeight="800" MinHeight="800" Width="1250" MaxWidth="1250" MinWidth="1250">
+        Title="АвиаРоссия" Height="800" MaxHeight="800" MinHeight="800" Width="1350" MaxWidth="1350" MinWidth="1350">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"></RowDefinition>

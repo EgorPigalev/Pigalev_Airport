@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Airport.Pages;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -75,7 +76,7 @@ namespace Airport
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-
+            Frameclass.MainFrame.Navigate(new AddTickets());
         }
     }
 }

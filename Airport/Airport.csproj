@@ -101,6 +101,9 @@
     <Compile Include="Gender.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AddTickets.xaml.cs">
+      <DependentUpon>AddTickets.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ListOfTickets.xaml.cs">
       <DependentUpon>ListOfTickets.xaml</DependentUpon>
     </Compile>
@@ -129,6 +132,10 @@
     <Compile Include="Pages\SeeUsers.xaml.cs">
       <DependentUpon>SeeUsers.xaml</DependentUpon>
     </Compile>
+    <Page Include="Pages\AddTickets.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ListOfTickets.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -5,13 +5,13 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Airport"
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1250"
+      d:DesignHeight="720" d:DesignWidth="1350"
       Title="AuthorizationPage" Background="#FFCFE8FF">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <StackPanel VerticalAlignment="Center" Width="550" Orientation="Vertical">
-                <TextBlock FontSize="35" TextWrapping="Wrap" TextAlignment="Center">Мы рады видеть вас</TextBlock>
-                <Image Height="400" Width="400" Source="../Resources/autorization.png"/>
+            <StackPanel VerticalAlignment="Center" Width="650" Orientation="Vertical">
+                <TextBlock FontSize="42" TextWrapping="Wrap" TextAlignment="Center">Мы рады видеть вас</TextBlock>
+                <Image Height="500" Width="500" Source="../Resources/autorization.png"/>
             </StackPanel>
             <Border Background="White" Width="700" CornerRadius="20, 0, 0, 20">
                 <Border.Effect>

@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Airport"
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1250"
+      d:DesignHeight="720" d:DesignWidth="1350"
       Title="ListOfTickets" Background="White" Margin="10" FontSize="18">
     <Grid>
         <Grid.RowDefinitions>
@@ -14,75 +14,77 @@
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <TextBlock HorizontalAlignment="Center" FontSize="35">Список купленных билетов</TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=tbHeader}">Список купленных билетов</TextBlock>
         </StackPanel>
-        <ScrollViewer Grid.Row="1">
-            <StackPanel>
-                <ListView x:Name="lvListTickets" ScrollViewer.HorizontalScrollBarVisibility="Disabled" HorizontalAlignment="Center">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel HorizontalAlignment="Center"></WrapPanel>
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Border Padding="10" CornerRadius="20" BorderThickness="1" BorderBrush="#445c93">
-                                <Grid Width="365" Height="350" Background="{Binding TimeColor}">
-                                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                                        <StackPanel>
-                                            <TextBlock Text="Билет на самолёт" HorizontalAlignment="Center" FontSize="22" FontWeight ="Bold"/>
-                                            <StackPanel Orientation="Horizontal" Margin="5">
-                                                <Image Height="50" Width="50" Source="../Resources/icon_route.png" Margin="0, 0, 20, 0"/>
-                                                <StackPanel Orientation="Vertical" Margin="0, 0, 20, 0">
-                                                    <TextBlock Text="От" HorizontalAlignment="Center"/>
-                                                    <TextBlock Uid="{Binding Flights.Routes.id_departure_point}" Name="tbDeparturePoint" Loaded="tbDeparturePoint_Loaded"/>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Vertical" Margin="0, 0, 20, 0">
-                                                    <TextBlock Text="До" HorizontalAlignment="Center"/>
-                                                    <TextBlock Uid="{Binding Flights.Routes.id_arrival_point}" Name="tbArrivalPoint" Loaded="tbDeparturePoint_Loaded"/>
-                                                </StackPanel>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal" Margin="5">
-                                                <Image Height="50" Width="50" Source="../Resources/icon_date_time.png" Margin="0, 0, 20, 0"/>
-                                                <StackPanel Orientation="Vertical" Margin="0, 0, 20, 0">
-                                                    <TextBlock Text="Дата" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="{Binding Flights.departure_date, StringFormat={}dd.MM.yyyy}"/>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Vertical" Margin="0, 0, 20, 0">
-                                                    <TextBlock Text="Время" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="{Binding Flights.departure_time, StringFormat=hh\\:mm}"/>
-                                                </StackPanel>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal" Margin="5">
-                                                <Image Height="50" Width="50" Source="../Resources/icon_people.png" Margin="0, 0, 20, 0"/>
-                                                <StackPanel Orientation="Vertical" Margin="0, 0, 20, 0">
-                                                    <TextBlock Text="Пассажир" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="{Binding NamePassenger}"/>
-                                                </StackPanel>
-                                                <StackPanel Orientation="Vertical" Margin="0, 0, 20, 0">
-                                                    <TextBlock Text="Кассир" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text="{Binding NameEmployee}"/>
-                                                </StackPanel>
-                                            </StackPanel>
-                                            <StackPanel Orientation="Horizontal" Margin="5">
-                                                <TextBlock Text="Цена: " FontSize="22" FontWeight="Bold"/>
-                                                <TextBlock Uid="{Binding id_ticket}" Name="tbCost" Loaded="tbCost_Loaded" FontSize="22"></TextBlock>
-                                            </StackPanel>
-                                            <TextBlock Uid="{Binding id_ticket}" Name="tbDiscounts" Loaded="tbDiscounts_Loaded" FontSize="16" Foreground="Red" Margin="5"></TextBlock>
+        <Grid Grid.Row="1">
+            <ListView x:Name="lvListTickets" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Center"></WrapPanel>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Padding="10" CornerRadius="20" BorderThickness="1" BorderBrush="#445c93">
+                            <Grid Width="390" Height="350" Background="{Binding TimeColor}">
+                                <StackPanel>
+                                    <TextBlock Text="Билет на самолёт" HorizontalAlignment="Center" FontSize="22" FontWeight="Bold"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                            <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="60"></RowDefinition>
+                                            <RowDefinition Height="60"></RowDefinition>
+                                            <RowDefinition Height="60"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Image Style="{StaticResource ResourceKey=iIcon}" Source="../Resources/icon_route.png" Grid.Row="0" Grid.Column="0"/>
+                                        <StackPanel Style="{StaticResource ResourceKey=spElementsList}" Grid.Row="0" Grid.Column="1">
+                                            <TextBlock Text="От" HorizontalAlignment="Center"/>
+                                            <TextBlock Uid="{Binding Flights.Routes.id_departure_point}" Name="tbDeparturePoint" Loaded="tbDeparturePoint_Loaded"/>
                                         </StackPanel>
-                                    </ScrollViewer>
-                                </Grid>
-                            </Border>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackPanel>
-        </ScrollViewer>
+                                        <StackPanel Style="{StaticResource ResourceKey=spElementsList}" Grid.Row="0" Grid.Column="2">
+                                            <TextBlock Text="До" HorizontalAlignment="Center"/>
+                                            <TextBlock Uid="{Binding Flights.Routes.id_arrival_point}" Name="tbArrivalPoint" Loaded="tbDeparturePoint_Loaded"/>
+                                        </StackPanel>
+                                        <Image Style="{StaticResource ResourceKey=iIcon}" Source="../Resources/icon_date_time.png" Grid.Row="1" Grid.Column="0"/>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1">
+                                            <TextBlock Text="Дата" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Flights.departure_date, StringFormat={}dd.MM.yyyy}"/>
+                                        </StackPanel>
+                                        <StackPanel Style="{StaticResource ResourceKey=spElementsList}" Grid.Row="1" Grid.Column="2">
+                                            <TextBlock Text="Время" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding Flights.departure_time, StringFormat=hh\\:mm}"/>
+                                        </StackPanel>
+                                        <Image Style="{StaticResource ResourceKey=iIcon}" Source="../Resources/icon_people.png" Grid.Row="2" Grid.Column="0"/>
+                                        <StackPanel Style="{StaticResource ResourceKey=spElementsList}" Grid.Row="2" Grid.Column="1">
+                                            <TextBlock Text="Пассажир" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding NamePassenger}"/>
+                                        </StackPanel>
+                                        <StackPanel Style="{StaticResource ResourceKey=spElementsList}" Grid.Row="2" Grid.Column="2">
+                                            <TextBlock Text="Кассир" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="{Binding NameEmployee}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <StackPanel Orientation="Horizontal" Margin="5">
+                                        <TextBlock Text="Цена: " FontSize="22" FontWeight="Bold"/>
+                                        <TextBlock Uid="{Binding id_ticket}" Name="tbCost" Loaded="tbCost_Loaded" FontSize="22"></TextBlock>
+                                    </StackPanel>
+                                    <TextBlock Uid="{Binding id_ticket}" Name="tbDiscounts" Loaded="tbDiscounts_Loaded" FontSize="16" Foreground="Red" Margin="5"></TextBlock>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
         <StackPanel Grid.Row="2">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 5, 0, 5">
-                <Image Height="25" Width="25" Source="../Resources/color_day_flight.png"/>
+            <StackPanel x:Name="spLegend" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 5, 0, 5">
+                <Image Style="{StaticResource ResourceKey=iIconHeader}" Source="../Resources/color_day_flight.png"/>
                 <TextBlock Text= " - Дневные рейсы     "/>
-                <Image Height="25" Width="25" Source="../Resources/color_night_flight.png"/>
+                <Image Style="{StaticResource ResourceKey=iIconHeader}" Source="../Resources/color_night_flight.png"/>
                 <TextBlock Text= " - Ночные рейсы"/>
             </StackPanel>
             <Grid>

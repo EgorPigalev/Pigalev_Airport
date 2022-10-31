@@ -23,7 +23,7 @@
                     <TextBlock TextAlignment="Center">Зарегистироваться</TextBlock>
                 </Button>
             </StackPanel>
-            <Image Height="350" Width="700" Source="../Resources/airplane.png" Margin="30"/>
+            <Image Height="400" Width="900" Source="../Resources/airplane.png" Margin="30"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Airport"
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1250"
+      d:DesignHeight="720" d:DesignWidth="1350"
       Title="SeeUsers" Background="White" Margin="10">
     <Grid>
         <Grid.RowDefinitions>
@@ -14,7 +14,7 @@
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-            <TextBlock HorizontalAlignment="Center" FontSize="35">Список зарегистрированных пользователей</TextBlock>
+            <TextBlock Style="{StaticResource ResourceKey=tbHeader}">Список зарегистрированных пользователей</TextBlock>
         </StackPanel>
         <StackPanel Grid.Row="1">
             <GroupBox Header="Поиск пользователей" FontSize="20" Margin="10">
