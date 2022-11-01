@@ -243,6 +243,8 @@
       <DependentUpon>BaseData.edmx</DependentUpon>
       <LastGenOutput>BaseData.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\clear_logo.png" />
+    <Resource Include="Resources\add_logo.png" />
     <Resource Include="Resources\color_night_flight.png" />
     <Resource Include="Resources\color_day_flight.png" />
     <Resource Include="Resources\icon_people.png" />

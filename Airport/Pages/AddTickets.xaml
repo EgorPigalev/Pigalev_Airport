@@ -6,9 +6,47 @@
       xmlns:local="clr-namespace:Airport.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1350"
-      Title="AddTickets" Background="White">
-
+      Title="AddTickets" Background="White" Margin="10" FontSize="18">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+            <Image Height="70" Width="70" Source="..\Resources\add_logo.png"/>
+            <TextBlock Style="{StaticResource ResourceKey=tbHeader}" VerticalAlignment="Center" Margin="10, 0, 0, 0">Добавление билета в каcсу</TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <GroupBox Header="Выбор маршрута">
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox x:Name="cbDeparture_point"/>
+                    <ComboBox x:Name="cbArrival_point"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Выбор времени">
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox x:Name="cbDay"/>
+                    <ComboBox x:Name="cbTime"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Покупатель">
+                <ComboBox x:Name="cbPassenger"/>
+            </GroupBox>
+            <GroupBox Header="Сотрудник">
+                <ComboBox x:Name="cbEmployee"/>
+            </GroupBox>
+            <GroupBox Header="Добавить скидку">
+                <ListBox Name="lbDiscount" SelectionMode="Multiple"></ListBox>
+            </GroupBox>
+            <TextBlock Text="Стоимость билета составит: " HorizontalAlignment="Center" FontSize="28"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <Image Height="80" Width="80" Source="..\Resources\clear_logo.png" HorizontalAlignment="Right"/>
+        </StackPanel>
+        <StackPanel Grid.Row="3">
+            <Button x:Name="BtnRegistration" Content="Оформить покупку"  Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnAuthorizationAndRegistration}" Cursor="Hand"/>
+        </StackPanel>
     </Grid>
 </Page>
