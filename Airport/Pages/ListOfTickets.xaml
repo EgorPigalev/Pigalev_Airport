@@ -88,7 +88,7 @@
                 <TextBlock Text= " - Ночные рейсы"/>
             </StackPanel>
             <Grid>
-                <Button x:Name="btnExit" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Left" Click="btnExit_Click" Content="Назад"/>
+                <Button x:Name="btnExit" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Left" Click="btnExit_Click" Content="Назад" Cursor="Hand"/>
                 <Button x:Name="btnAdd" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Right" Click="btnAdd_Click" Content="Добавить"/>
             </Grid>
         </StackPanel>
