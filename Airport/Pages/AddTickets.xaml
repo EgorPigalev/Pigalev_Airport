@@ -8,57 +8,84 @@
       d:DesignHeight="720" d:DesignWidth="1350"
       Title="AddTickets" Background="White" Margin="10" FontSize="18">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="10*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-            <Image Height="70" Width="70" Source="..\Resources\add_logo.png"/>
-            <TextBlock Style="{StaticResource ResourceKey=tbHeader}" VerticalAlignment="Center" Margin="10, 0, 0, 0">Добавление билета в каcсу</TextBlock>
-        </StackPanel>
-        <StackPanel Grid.Row="1">
-            <GroupBox Header="Выбор маршрута">
-                <StackPanel Orientation="Horizontal">
-                    <ComboBox x:Name="cbDeparture_point" Width="500" Margin="10"/>
-                    <ComboBox x:Name="cbArrival_point" Width="500"  Margin="10"/>
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Header="Выбор времени">
-                <StackPanel Orientation="Horizontal">
-                    <ComboBox x:Name="cbDay" Width="500" Margin="10"/>
-                    <ComboBox x:Name="cbTime" Width="500" Margin="10"/>
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Header="Покупатель">
-                <ComboBox x:Name="cbPassenger"/>
-            </GroupBox>
-            <GroupBox Header="Сотрудник">
-                <ComboBox x:Name="cbEmployee"/>
-            </GroupBox>
-            <GroupBox Header="Добавить скидку">
-                <ListBox Name="lbDiscount" SelectionMode="Multiple">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding description}"></TextBlock>
-                                <TextBlock Text="{Binding value}"></TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </GroupBox>
-            <TextBlock Text="Стоимость билета составит: " HorizontalAlignment="Center" FontSize="28"/>
-        </StackPanel>
-        <StackPanel Grid.Row="2">
-            <Image Height="80" Width="80" Source="..\Resources\clear_logo.png" HorizontalAlignment="Right"/>
-        </StackPanel>
-        <Grid Grid.Row="3">
-            <Grid>
-                <Button x:Name="btnBack" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Left" Click="BtnBack_Click" Content="Назад" Cursor="Hand"/>
-                <Button x:Name="btnAdd" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Center"  Content="Добавить"/>
-            </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Image Height="300" Width="300" Source="..\Resources\icon_ticket.png"/>
+            <Button x:Name="btnBack" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Center" Click="BtnBack_Click" Content="Назад" Grid.Row="1"/>
+        </Grid>
+        
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="10*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                <Image Height="100" Width="100" Source="..\Resources\icon_addTicket.png"/>
+                <TextBlock Style="{StaticResource ResourceKey=tbHeader}" VerticalAlignment="Center" Margin="10, 0, 0, 0">Добавление билета в каcсу</TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Row="1">
+                <GroupBox Header="Выбор маршрута" Width="900">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Width="420" Margin="10, 0, 10, 0">
+                            <TextBlock Text="От" HorizontalAlignment="Center"/>
+                            <ComboBox x:Name="cbDeparture_point"/>
+                        </StackPanel>
+                        <StackPanel Width="420" Margin="10, 0, 10, 0">
+                            <TextBlock Text="До" HorizontalAlignment="Center"/>
+                            <ComboBox x:Name="cbArrival_point"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Выбор даты и времени" Width="900">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Width="420" Margin="10, 0, 10, 0">
+                            <TextBlock Text="Дата" HorizontalAlignment="Center"/>
+                            <ComboBox x:Name="cbDay"/>
+                        </StackPanel>
+                        <StackPanel Width="420" Margin="10, 0, 10, 0">
+                            <TextBlock Text="Время" HorizontalAlignment="Center"/>
+                            <ComboBox x:Name="cbTime"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Покупка" Width="900">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Width="420" Margin="10, 0, 10, 0">
+                            <TextBlock Text="Покупатель" HorizontalAlignment="Center"/>
+                            <ComboBox x:Name="cbPassenger"/>
+                        </StackPanel>
+                        <StackPanel Width="420" Margin="10, 0, 10, 0">
+                            <TextBlock Text="Кассир" HorizontalAlignment="Center"/>
+                            <ComboBox x:Name="cbEmployee"/>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Header="Добавить скидку" Width="900">
+                    <ListBox Name="lbDiscount" SelectionMode="Multiple" Height="100">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding description}"></TextBlock>
+                                    <TextBlock Text="{Binding value}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </GroupBox>
+                <TextBlock Text="Стоимость билета составит: " HorizontalAlignment="Center" FontSize="28"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="btnClear" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Очистить"/>
+                <Button x:Name="btnAdd" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Добавить"/>
+            </StackPanel>
         </Grid>
     </Grid>
 </Page>

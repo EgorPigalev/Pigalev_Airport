@@ -152,5 +152,59 @@ namespace Airport
                 e.Handled = true;
             }
         }
+
+        private void imVisiblePassword_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            HidePassword();
+        }
+
+        private void imVisiblePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ShowPassword();
+        }
+
+        private void HidePassword()
+        {
+            imVisiblePassword.Source = new BitmapImage(new Uri("..\\Resources\\icon_password_visible.png", UriKind.Relative));
+            pbPasswordVisible.Visibility = Visibility.Collapsed;
+            pbPassword.Visibility = Visibility.Visible;
+            pbPassword.Focus();
+        }
+
+
+        private void ShowPassword()
+        {
+            imVisiblePassword.Source = new BitmapImage(new Uri("..\\Resources\\icon_password_not_visible.png", UriKind.Relative));
+            pbPasswordVisible.Visibility = Visibility.Visible;
+            pbPassword.Visibility = Visibility.Collapsed;
+            pbPasswordVisible.Text = pbPassword.Password;
+        }
+
+        private void imVisiblePasswordRepeated_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            HidePasswordRepeated();
+        }
+
+        private void imVisiblePasswordRepeated_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ShowPasswordRepeated();
+        }
+
+        private void HidePasswordRepeated()
+        {
+            imVisiblePasswordRepeated.Source = new BitmapImage(new Uri("..\\Resources\\icon_password_visible.png", UriKind.Relative));
+            pbPasswordRepeatedVisible.Visibility = Visibility.Collapsed;
+            pbPasswordRepeated.Visibility = Visibility.Visible;
+            pbPasswordRepeated.Focus();
+        }
+
+
+        private void ShowPasswordRepeated()
+        {
+            imVisiblePasswordRepeated.Source = new BitmapImage(new Uri("..\\Resources\\icon_password_not_visible.png", UriKind.Relative));
+            pbPasswordRepeatedVisible.Visibility = Visibility.Visible;
+            pbPasswordRepeated.Visibility = Visibility.Collapsed;
+            pbPasswordRepeatedVisible.Text = pbPasswordRepeated.Password;
+        }
     }
 }

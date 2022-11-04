@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,6 +56,33 @@ namespace Airport
         private void TBNextRegistration_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             Frameclass.MainFrame.Navigate(new RegistrationPage());
+        }
+
+        private void imVisiblePassword_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            HidePassword();
+        }
+
+        private void HidePassword()
+        {
+            imVisiblePassword.Source = new BitmapImage(new Uri("..\\Resources\\icon_password_visible.png", UriKind.Relative));
+            pbPasswordVisible.Visibility = Visibility.Collapsed;
+            pbPassword.Visibility = Visibility.Visible;
+            pbPassword.Focus();
+        }
+
+
+        private void ShowPassword()
+        {
+            imVisiblePassword.Source = new BitmapImage(new Uri("..\\Resources\\icon_password_not_visible.png", UriKind.Relative));
+            pbPasswordVisible.Visibility = Visibility.Visible;
+            pbPassword.Visibility = Visibility.Collapsed;
+            pbPasswordVisible.Text = pbPassword.Password;
+        }
+
+        private void imVisiblePassword_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ShowPassword();
         }
     }
 }

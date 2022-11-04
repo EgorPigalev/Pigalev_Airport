@@ -32,7 +32,11 @@
                             <TextBox x:Name="tboxLogin" MaxLength="50"/>
                         </GroupBox>
                         <GroupBox Header="Введите пароль" FontSize="28">
-                            <PasswordBox x:Name="pbPassword"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Width="550" x:Name="pbPasswordVisible" Visibility="Collapsed"/>
+                                <PasswordBox Width="550" x:Name="pbPassword"/>
+                                <Image x:Name="imVisiblePassword" Height="40" Width="40" Source="..\Resources\icon_password_visible.png" Margin="10, 0, 0, 0" PreviewMouseUp="imVisiblePassword_PreviewMouseUp" PreviewMouseDown="imVisiblePassword_PreviewMouseDown"/>
+                            </StackPanel>
                         </GroupBox>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Margin="40,0,40,0" HorizontalAlignment="Center">

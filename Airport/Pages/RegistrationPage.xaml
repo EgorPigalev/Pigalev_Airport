@@ -52,16 +52,24 @@
                         </GroupBox>
                         <StackPanel Orientation="Horizontal"  Margin="0, 5">
                             <GroupBox Header="Пароль*" Style="{StaticResource ResourceKey=GBRegistrationPassword}">
-                                <PasswordBox x:Name="pbPassword">
-                                    <PasswordBox.ToolTip>
-                                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" Width="400">
-                                            Введенный пароль должен удовлетворять следующим требованиям: не менее 1 заглавного латинского символа, не менее 3 строчных латинских символов, не менее 2 цифры и не менее 1 спец. символа. Общая длина пароля не менее 8 символов
-                                        </TextBlock>
-                                    </PasswordBox.ToolTip>
-                                </PasswordBox>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Width="380" x:Name="pbPasswordVisible" Visibility="Collapsed"/>
+                                    <PasswordBox Width="380" x:Name="pbPassword">
+                                        <PasswordBox.ToolTip>
+                                            <TextBlock TextWrapping = "Wrap" TextAlignment="Center" Width="400">
+                                                Введенный пароль должен удовлетворять следующим требованиям: не менее 1 заглавного латинского символа, не менее 3 строчных латинских символов, не менее 2 цифры и не менее 1 спец.символа.Общая длина пароля не менее 8 символов
+                                            </TextBlock>
+                                        </PasswordBox.ToolTip>
+                                    </PasswordBox>
+                                    <Image x:Name="imVisiblePassword" Height="35" Width="35" Source="..\Resources\icon_password_visible.png" Margin="10, 0, 0, 0" PreviewMouseUp="imVisiblePassword_PreviewMouseUp" PreviewMouseDown="imVisiblePassword_PreviewMouseDown"/>
+                                </StackPanel>
                             </GroupBox>
                             <GroupBox Header="Повторный пароль*" Style="{StaticResource ResourceKey=GBRegistrationPassword}">
-                                <PasswordBox x:Name="pbPasswordRepeated"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Width="380" x:Name="pbPasswordRepeatedVisible" Visibility="Collapsed"/>
+                                    <PasswordBox Width="380" x:Name="pbPasswordRepeated"/>
+                                    <Image x:Name="imVisiblePasswordRepeated" Height="35" Width="35" Source="..\Resources\icon_password_visible.png" Margin="10, 0, 0, 0" PreviewMouseUp="imVisiblePasswordRepeated_PreviewMouseUp" PreviewMouseDown="imVisiblePasswordRepeated_PreviewMouseDown"/>
+                                </StackPanel>
                             </GroupBox>
                         </StackPanel>
                         <TextBlock FontSize="18" HorizontalAlignment="Center"  Margin="0, 5">* - поля обязательные к заполнению</TextBlock>
