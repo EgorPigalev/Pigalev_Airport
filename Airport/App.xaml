@@ -108,5 +108,25 @@
                 <Setter Property="Margin" Value="10, 0, 0, 0"/>
             </Style.Setters>
         </Style>
+        <Style x:Key="spAddTicketsRoute" TargetType="StackPanel">
+            <Style.Setters>
+                <Setter Property="Width" Value="275"/>
+                <Setter Property="Margin" Value="10, 0, 10, 0"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="spAddTicketsBuy" TargetType="StackPanel">
+            <Style.Setters>
+                <Setter Property="Width" Value="425"/>
+                <Setter Property="Margin" Value="10, 0, 10, 0"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="imClearRoute" TargetType="Image">
+            <Style.Setters>
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="Width" Value="30"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </Style.Setters>
+        </Style>
     </Application.Resources>
 </Application>
