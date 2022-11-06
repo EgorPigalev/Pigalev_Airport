@@ -11,7 +11,27 @@ namespace Airport
     public partial class Box_Offic
     {
 
-
+        public string DepartureDate
+        {
+            get
+            {
+                return Flights.departure_date.ToString("dd MMMM yyyy");
+            }
+        }
+        public string DepartureTime
+        {
+            get
+            {
+                return Flights.departure_time.ToString("hh\\:mm");
+            }
+        }
+        public string DateSale
+        {
+            get
+            {
+                return date_of_sale.ToString("dd MMMM yyyy HH:mm");
+            }
+        }
         public SolidColorBrush TimeColor
         {
             get

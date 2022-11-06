@@ -1,6 +1,7 @@
 ﻿using Airport.Pages;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -77,6 +78,21 @@ namespace Airport
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             Frameclass.MainFrame.Navigate(new AddTickets());
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+            int index = Convert.ToInt32(btn.Uid);
+            Box_Offic ticket = Base.BE.Box_Offic.FirstOrDefault(x => x.id_ticket == index);
+            Base.BE.Box_Offic.Remove(ticket);         
+            Base.BE.SaveChanges();
+            Frameclass.MainFrame.Navigate(new ListOfTickets());
+        }
+
+        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

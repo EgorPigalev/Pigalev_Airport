@@ -26,7 +26,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Border Padding="10" CornerRadius="20" BorderThickness="1" BorderBrush="#445c93">
-                            <Grid Width="390" Height="350" Background="{Binding TimeColor}">
+                            <Grid Width="390" Height="400" Background="{Binding TimeColor}">
                                 <StackPanel>
                                     <TextBlock Text="Билет на самолёт" HorizontalAlignment="Center" FontSize="22" FontWeight="Bold"/>
                                     <Grid>
@@ -52,11 +52,11 @@
                                         <Image Style="{StaticResource ResourceKey=iIcon}" Source="../Resources/icon_date_time.png" Grid.Row="1" Grid.Column="0"/>
                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1">
                                             <TextBlock Text="Дата" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="{Binding Flights.departure_date, StringFormat={}dd.MM.yyyy}"/>
+                                            <TextBlock Text="{Binding DepartureDate}"/>
                                         </StackPanel>
                                         <StackPanel Style="{StaticResource ResourceKey=spElementsList}" Grid.Row="1" Grid.Column="2">
                                             <TextBlock Text="Время" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="{Binding Flights.departure_time, StringFormat=hh\\:mm}"/>
+                                            <TextBlock Text="{Binding DepartureTime}"/>
                                         </StackPanel>
                                         <Image Style="{StaticResource ResourceKey=iIcon}" Source="../Resources/icon_people.png" Grid.Row="2" Grid.Column="0"/>
                                         <StackPanel Style="{StaticResource ResourceKey=spElementsList}" Grid.Row="2" Grid.Column="1">
@@ -68,14 +68,15 @@
                                             <TextBlock Text="{Binding Employees.FIO}"/>
                                         </StackPanel>
                                     </Grid>
+                                    <TextBlock Text="{Binding DateSale, StringFormat= Дата продажи: {0}}" HorizontalAlignment="Center"/>
                                     <StackPanel Orientation="Horizontal" Margin="5">
                                         <TextBlock Text="Цена: " FontSize="22" FontWeight="Bold"/>
                                         <TextBlock Uid="{Binding id_ticket}" Name="tbCost" Loaded="tbCost_Loaded" FontSize="22"></TextBlock>
                                     </StackPanel>
                                     <TextBlock Uid="{Binding id_ticket}" Name="tbDiscounts" Loaded="tbDiscounts_Loaded" FontSize="16" Foreground="Red" Margin="5"></TextBlock>
                                     <Grid>
-                                        <Button x:Name="btnDelete" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Left" Content="Удалить"/>
-                                        <Button x:Name="btnUpdate" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Right" Content="Изменить"/>
+                                        <Button x:Name="btnDelete"  Uid="{Binding id_ticket}" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Left" Content="Удалить" Click="btnDelete_Click"/>
+                                        <Button x:Name="btnUpdate" Uid="{Binding id_ticket}" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Right" Content="Изменить" Click="btnUpdate_Click"/>
                                     </Grid>
                                 </StackPanel>
                             </Grid>
