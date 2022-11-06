@@ -61,14 +61,14 @@
                                             </TextBlock>
                                         </PasswordBox.ToolTip>
                                     </PasswordBox>
-                                    <Image x:Name="imVisiblePassword" Height="35" Width="35" Source="..\Resources\icon_password_visible.png" Margin="10, 0, 0, 0" PreviewMouseUp="imVisiblePassword_PreviewMouseUp" PreviewMouseDown="imVisiblePassword_PreviewMouseDown"/>
+                                    <Image x:Name="imVisiblePassword" Style="{StaticResource ResourceKey=imVisiblePasswordRegistration}" Source="..\Resources\icon_password_visible.png" PreviewMouseUp="imVisiblePassword_PreviewMouseUp" PreviewMouseDown="imVisiblePassword_PreviewMouseDown"/>
                                 </StackPanel>
                             </GroupBox>
                             <GroupBox Header="Повторный пароль*" Style="{StaticResource ResourceKey=GBRegistrationPassword}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBox Width="380" x:Name="pbPasswordRepeatedVisible" Visibility="Collapsed"/>
                                     <PasswordBox Width="380" x:Name="pbPasswordRepeated"/>
-                                    <Image x:Name="imVisiblePasswordRepeated" Height="35" Width="35" Source="..\Resources\icon_password_visible.png" Margin="10, 0, 0, 0" PreviewMouseUp="imVisiblePasswordRepeated_PreviewMouseUp" PreviewMouseDown="imVisiblePasswordRepeated_PreviewMouseDown"/>
+                                    <Image x:Name="imVisiblePasswordRepeated" Style="{StaticResource ResourceKey=imVisiblePasswordRegistration}" Source="..\Resources\icon_password_visible.png" PreviewMouseUp="imVisiblePasswordRepeated_PreviewMouseUp" PreviewMouseDown="imVisiblePasswordRepeated_PreviewMouseDown"/>
                                 </StackPanel>
                             </GroupBox>
                         </StackPanel>

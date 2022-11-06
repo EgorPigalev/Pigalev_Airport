@@ -10,21 +10,7 @@ namespace Airport
 {
     public partial class Box_Offic
     {
-        public string NamePassenger
-        {
-            get
-            {
-                return Passengers.surname + " " + Passengers.name[0] + "." + Passengers.patronomic[0] + ".";
-            }
-        }
 
-        public string NameEmployee
-        {
-            get
-            {
-                return Employees.surname + " " + Employees.name[0] + "." + Employees.patronomic[0] + ".";
-            }
-        }
 
         public SolidColorBrush TimeColor
         {

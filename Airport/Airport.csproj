@@ -114,6 +114,9 @@
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\PartialTickets.cs" />
+    <Compile Include="Classes\PartialEmployess.cs" />
+    <Compile Include="Classes\PartialPassengers.cs" />
+    <Compile Include="PartialFlights.cs" />
     <Compile Include="Passengers.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
@@ -243,6 +246,7 @@
       <DependentUpon>BaseData.edmx</DependentUpon>
       <LastGenOutput>BaseData.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\icon_clear_search_flight.png" />
     <Resource Include="Resources\icon_ticket.png" />
     <Resource Include="Resources\icon_addTicket.png" />
     <Resource Include="Resources\icon_password_not_visible.png" />

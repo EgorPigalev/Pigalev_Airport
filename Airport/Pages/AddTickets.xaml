@@ -32,59 +32,60 @@
                 <TextBlock Style="{StaticResource ResourceKey=tbHeader}" VerticalAlignment="Center" Margin="10, 0, 0, 0">Добавление билета в каcсу</TextBlock>
             </StackPanel>
             <StackPanel Grid.Row="1">
-                <GroupBox Header="Выбор маршрута" Width="900">
+                <GroupBox Header="Поиск рейса" Width="900">
                     <StackPanel Orientation="Horizontal">
-                        <StackPanel Width="420" Margin="10, 0, 10, 0">
+                        <StackPanel Width="275" Margin="10, 0, 10, 0">
                             <TextBlock Text="От" HorizontalAlignment="Center"/>
-                            <ComboBox x:Name="cbDeparture_point"/>
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox x:Name="cbDeparture_point" SelectionChanged="SelectionChanged" Width="240"/>
+                                <Image Name="imDeparture_point" Height="30" Width="30" Source="..\Resources\icon_clear_search_flight.png" Visibility="Collapsed" MouseDown="imDeparture_point_MouseDown" Cursor="Hand"/>
+                            </StackPanel>
                         </StackPanel>
-                        <StackPanel Width="420" Margin="10, 0, 10, 0">
+                        <StackPanel Width="275" Margin="10, 0, 10, 0">
                             <TextBlock Text="До" HorizontalAlignment="Center"/>
-                            <ComboBox x:Name="cbArrival_point"/>
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox x:Name="cbArrival_point" SelectionChanged="SelectionChanged" Width="240"/>
+                                <Image Name="imArrival_point" Height="30" Width="30" Source="..\Resources\icon_clear_search_flight.png" Visibility="Collapsed" MouseDown="imArrival_point_MouseDown" Cursor="Hand"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Width="275" Margin="10, 0, 10, 0">
+                            <TextBlock Text="Дата" HorizontalAlignment="Center"/>
+                            <DatePicker x:Name="dpDay" SelectedDateChanged="SelectionChanged"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Header="Выбор даты и времени" Width="900">
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Width="420" Margin="10, 0, 10, 0">
-                            <TextBlock Text="Дата" HorizontalAlignment="Center"/>
-                            <ComboBox x:Name="cbDay"/>
-                        </StackPanel>
-                        <StackPanel Width="420" Margin="10, 0, 10, 0">
-                            <TextBlock Text="Время" HorizontalAlignment="Center"/>
-                            <ComboBox x:Name="cbTime"/>
-                        </StackPanel>
-                    </StackPanel>
+                <GroupBox Header="Выбор рейса" Width="900">
+                    <ComboBox Name="cbFlight"  Margin="10, 0, 10, 0" SelectionChanged="cbFlight_SelectionChanged"/>
                 </GroupBox>
                 <GroupBox Header="Покупка" Width="900">
                     <StackPanel Orientation="Horizontal">
-                        <StackPanel Width="420" Margin="10, 0, 10, 0">
+                        <StackPanel Width="425" Margin="10, 0, 10, 0">
                             <TextBlock Text="Покупатель" HorizontalAlignment="Center"/>
                             <ComboBox x:Name="cbPassenger"/>
                         </StackPanel>
-                        <StackPanel Width="420" Margin="10, 0, 10, 0">
+                        <StackPanel Width="425" Margin="10, 0, 10, 0">
                             <TextBlock Text="Кассир" HorizontalAlignment="Center"/>
                             <ComboBox x:Name="cbEmployee"/>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
-                <GroupBox Header="Добавить скидку" Width="900">
-                    <ListBox Name="lbDiscount" SelectionMode="Multiple" Height="100">
+                <GroupBox Header="Добавление скидки" Width="900">
+                    <ListBox Name="lbDiscount" SelectionMode="Multiple" Height="150" SelectionChanged="cbFlight_SelectionChanged">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding description}"></TextBlock>
-                                    <TextBlock Text="{Binding value}"></TextBlock>
+                                    <TextBlock Text="{Binding value, StringFormat={} - {0}%}"></TextBlock>
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
                 </GroupBox>
-                <TextBlock Text="Стоимость билета составит: " HorizontalAlignment="Center" FontSize="28"/>
+                <TextBlock Name="tbPrice" Text="Здесь будет указана стоимость билета" HorizontalAlignment="Center" FontSize="32"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="btnClear" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Очистить"/>
-                <Button x:Name="btnAdd" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Добавить"/>
+                <Button x:Name="btnClear" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Очистить" Click="btnClear_Click"/>
+                <Button x:Name="btnAdd" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Добавить" Click="btnAdd_Click"/>
             </StackPanel>
         </Grid>
     </Grid>

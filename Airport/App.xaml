@@ -101,5 +101,12 @@
                 <Setter Property="Orientation" Value="Vertical"/>
             </Style.Setters>
         </Style>
+        <Style x:Key="imVisiblePasswordRegistration" TargetType="Image">
+            <Style.Setters>
+                <Setter Property="Height" Value="35"/>
+                <Setter Property="Width" Value="35"/>
+                <Setter Property="Margin" Value="10, 0, 0, 0"/>
+            </Style.Setters>
+        </Style>
     </Application.Resources>
 </Application>

@@ -61,11 +61,11 @@
                                         <Image Style="{StaticResource ResourceKey=iIcon}" Source="../Resources/icon_people.png" Grid.Row="2" Grid.Column="0"/>
                                         <StackPanel Style="{StaticResource ResourceKey=spElementsList}" Grid.Row="2" Grid.Column="1">
                                             <TextBlock Text="Пассажир" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="{Binding NamePassenger}"/>
+                                            <TextBlock Text="{Binding Passengers.FIO}"/>
                                         </StackPanel>
                                         <StackPanel Style="{StaticResource ResourceKey=spElementsList}" Grid.Row="2" Grid.Column="2">
                                             <TextBlock Text="Кассир" HorizontalAlignment="Center"/>
-                                            <TextBlock Text="{Binding NameEmployee}"/>
+                                            <TextBlock Text="{Binding Employees.FIO}"/>
                                         </StackPanel>
                                     </Grid>
                                     <StackPanel Orientation="Horizontal" Margin="5">
@@ -73,6 +73,10 @@
                                         <TextBlock Uid="{Binding id_ticket}" Name="tbCost" Loaded="tbCost_Loaded" FontSize="22"></TextBlock>
                                     </StackPanel>
                                     <TextBlock Uid="{Binding id_ticket}" Name="tbDiscounts" Loaded="tbDiscounts_Loaded" FontSize="16" Foreground="Red" Margin="5"></TextBlock>
+                                    <Grid>
+                                        <Button x:Name="btnDelete" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Left" Content="Удалить"/>
+                                        <Button x:Name="btnUpdate" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Right" Content="Изменить"/>
+                                    </Grid>
                                 </StackPanel>
                             </Grid>
                         </Border>

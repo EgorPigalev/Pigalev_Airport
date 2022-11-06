@@ -120,7 +120,9 @@
           <Property Name="flight_duration" Type="float" Nullable="false" />
         </EntityType>
         <Association Name="FK_ApplicationOfDiscounts_Box_Offic">
-          <End Role="Box_Offic" Type="Self.Box_Offic" Multiplicity="1" />
+          <End Role="Box_Offic" Type="Self.Box_Offic" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ApplicationOfDiscounts" Type="Self.ApplicationOfDiscounts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Box_Offic">
@@ -132,7 +134,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ApplicationOfDiscounts_Discounts">
-          <End Role="Discounts" Type="Self.Discounts" Multiplicity="1" />
+          <End Role="Discounts" Type="Self.Discounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="ApplicationOfDiscounts" Type="Self.ApplicationOfDiscounts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Discounts">
@@ -144,7 +148,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BoxOffic_Cashiers">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Box_Offic" Type="Self.Box_Offic" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -156,7 +162,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BoxOffic_Flights">
-          <End Role="Flights" Type="Self.Flights" Multiplicity="1" />
+          <End Role="Flights" Type="Self.Flights" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Box_Offic" Type="Self.Box_Offic" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Flights">
@@ -168,7 +176,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BoxOffic_Passengers">
-          <End Role="Passengers" Type="Self.Passengers" Multiplicity="1" />
+          <End Role="Passengers" Type="Self.Passengers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Box_Offic" Type="Self.Box_Offic" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Passengers">
@@ -192,7 +202,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cashiers_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
@@ -204,7 +216,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Flights_Planes">
-          <End Role="Planes" Type="Self.Planes" Multiplicity="1" />
+          <End Role="Planes" Type="Self.Planes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Flights" Type="Self.Flights" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Planes">
@@ -216,7 +230,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Flights_Routes">
-          <End Role="Routes" Type="Self.Routes" Multiplicity="1" />
+          <End Role="Routes" Type="Self.Routes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Flights" Type="Self.Flights" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Routes">
@@ -228,7 +244,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Passengers_Gender">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+          <End Role="Gender" Type="Self.Gender" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Passengers" Type="Self.Passengers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
@@ -240,7 +258,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Passport_deta_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Passport_deta" Type="Self.Passport_deta" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -252,7 +272,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Passport_deta_Passengers">
-          <End Role="Passengers" Type="Self.Passengers" Multiplicity="1" />
+          <End Role="Passengers" Type="Self.Passengers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Passport_deta" Type="Self.Passport_deta" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Passengers">
@@ -264,7 +286,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Routes_Citys">
-          <End Role="Citys" Type="Self.Citys" Multiplicity="1" />
+          <End Role="Citys" Type="Self.Citys" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Routes" Type="Self.Routes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Citys">
@@ -574,7 +598,9 @@
           <NavigationProperty Name="Flights" Relationship="BaseDataModel.FK_Flights_Routes" FromRole="Routes" ToRole="Flights" />
         </EntityType>
         <Association Name="FK_ApplicationOfDiscounts_Box_Offic">
-          <End Type="BaseDataModel.Box_Offic" Role="Box_Offic" Multiplicity="1" />
+          <End Type="BaseDataModel.Box_Offic" Role="Box_Offic" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BaseDataModel.ApplicationOfDiscounts" Role="ApplicationOfDiscounts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Box_Offic">
@@ -586,7 +612,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ApplicationOfDiscounts_Discounts">
-          <End Type="BaseDataModel.Discounts" Role="Discounts" Multiplicity="1" />
+          <End Type="BaseDataModel.Discounts" Role="Discounts" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BaseDataModel.ApplicationOfDiscounts" Role="ApplicationOfDiscounts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Discounts">
@@ -598,7 +626,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BoxOffic_Cashiers">
-          <End Type="BaseDataModel.Employees" Role="Employees" Multiplicity="1" />
+          <End Type="BaseDataModel.Employees" Role="Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BaseDataModel.Box_Offic" Role="Box_Offic" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -610,7 +640,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BoxOffic_Flights">
-          <End Type="BaseDataModel.Flights" Role="Flights" Multiplicity="1" />
+          <End Type="BaseDataModel.Flights" Role="Flights" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BaseDataModel.Box_Offic" Role="Box_Offic" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Flights">
@@ -622,7 +654,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BoxOffic_Passengers">
-          <End Type="BaseDataModel.Passengers" Role="Passengers" Multiplicity="1" />
+          <End Type="BaseDataModel.Passengers" Role="Passengers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BaseDataModel.Box_Offic" Role="Box_Offic" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Passengers">
@@ -634,7 +668,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Routes_Citys">
-          <End Type="BaseDataModel.Citys" Role="Citys" Multiplicity="1" />
+          <End Type="BaseDataModel.Citys" Role="Citys" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BaseDataModel.Routes" Role="Routes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Citys">
@@ -670,7 +706,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cashiers_Roles">
-          <End Type="BaseDataModel.Roles" Role="Roles" Multiplicity="1" />
+          <End Type="BaseDataModel.Roles" Role="Roles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BaseDataModel.Employees" Role="Employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
@@ -682,7 +720,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Passport_deta_Employees">
-          <End Type="BaseDataModel.Employees" Role="Employees" Multiplicity="1" />
+          <End Type="BaseDataModel.Employees" Role="Employees" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BaseDataModel.Passport_deta" Role="Passport_deta" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -694,7 +734,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Flights_Planes">
-          <End Type="BaseDataModel.Planes" Role="Planes" Multiplicity="1" />
+          <End Type="BaseDataModel.Planes" Role="Planes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BaseDataModel.Flights" Role="Flights" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Planes">
@@ -706,7 +748,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Flights_Routes">
-          <End Type="BaseDataModel.Routes" Role="Routes" Multiplicity="1" />
+          <End Type="BaseDataModel.Routes" Role="Routes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BaseDataModel.Flights" Role="Flights" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Routes">
@@ -718,7 +762,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Passengers_Gender">
-          <End Type="BaseDataModel.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="BaseDataModel.Gender" Role="Gender" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BaseDataModel.Passengers" Role="Passengers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Gender">
@@ -730,7 +776,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Passport_deta_Passengers">
-          <End Type="BaseDataModel.Passengers" Role="Passengers" Multiplicity="1" />
+          <End Type="BaseDataModel.Passengers" Role="Passengers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Type="BaseDataModel.Passport_deta" Role="Passport_deta" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Passengers">
