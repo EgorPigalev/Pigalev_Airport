@@ -27,6 +27,9 @@ namespace Airport.Pages
     {
         Box_Offic ticket;
         bool flagUpdate = false;
+        System.Collections.IList applicationOfDiscounts;
+        bool flugExceededDiscount = false;
+        
         int CountTickets(int index) // Проверка на вместительность самолёта по этому маршруту
         {
             List<Box_Offic> CountTickets = Base.BE.Box_Offic.Where(x => x.id_flight == index).ToList();
@@ -86,38 +89,49 @@ namespace Airport.Pages
                 }
             }
 
+            applicationOfDiscounts = lbDiscount.SelectedItems;
             imHeaderTicket.Source = new BitmapImage(new Uri("..\\Resources\\icon_updTicket.png", UriKind.Relative));
+            tbHeaderTiket.Text = "Редактирование билета в кассе";
+            btnClear.Content = "Отмена";
+            btnAdd.Content = "Изменить";
         }
-        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        private void BtnBack_Click(object sender, RoutedEventArgs e) // кнопка назад
         {
             Frameclass.MainFrame.Navigate(new ListOfTickets());
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
-            uploadFields();
-            cbDeparture_point.SelectedItem = null;
-            cbArrival_point.SelectedItem = null;
-            dpDay.Text = null;
-            cbFlight.SelectedItem = null;
-            cbPassenger.SelectedItem = null;
-            cbEmployee.SelectedItem = null;
-            lbDiscount.SelectedItems.Clear();
-            imDeparture_point.Visibility = Visibility.Collapsed;
-            imArrival_point.Visibility= Visibility.Collapsed;
+            if (flagUpdate == true) // если это изменение, то кнопка возвращает все данные к исходным, которые в базе
+            {
+                Frameclass.MainFrame.Navigate(new AddTickets(ticket));
+            }
+            else // если происходит добавление, то эта кнопка очищает все поля
+            {
+                uploadFields();
+                cbDeparture_point.SelectedItem = null;
+                cbArrival_point.SelectedItem = null;
+                dpDay.Text = null;
+                cbFlight.SelectedItem = null;
+                cbPassenger.SelectedItem = null;
+                cbEmployee.SelectedItem = null;
+                lbDiscount.SelectedItems.Clear();
+                imDeparture_point.Visibility = Visibility.Collapsed;
+                imArrival_point.Visibility = Visibility.Collapsed;
+            }
         }
 
-        private List<Flights> getListFlights()
+        private List<Flights> getListFlights() // получение списка рейсов
         {
             List<Flights> listFlight = new List<Flights>();
             List<Flights> flights = Base.BE.Flights.ToList();
             foreach (Flights flight in flights)
             {
-                if (flight.Planes.number_of_seats <= CountTickets(flight.id_flight))
+                if (flight.Planes.number_of_seats <= CountTickets(flight.id_flight)) // если максимальное количество мест у самолёта превысило количество купленных билетов
                 {
                     break;
                 }
-                listFlight.Add(flight);
+                listFlight.Add(flight); // если есть свободные места на рейс
             }
             listFlight.GroupBy(x => x.departure_date);
             return listFlight;
@@ -128,7 +142,7 @@ namespace Airport.Pages
             updateListFlights();
         }
 
-        private void updateListFlights()
+        private void updateListFlights() // метод для поиска рейса по трём параметрам (пункт отправления, пункт прибытия, дата рейса)
         {
             List<Flights> flights = getListFlights();
             if (cbDeparture_point.SelectedItem != null)
@@ -176,11 +190,11 @@ namespace Airport.Pages
                     flights = updateListFlightsDate(flights);
                 }
             }
-            cbFlight.ItemsSource = flights;
+            cbFlight.ItemsSource = flights; // установка нового списка (отобранный по поиску)
             cbFlight.SelectedValuePath = "id_flight";
             cbFlight.DisplayMemberPath = "listFlights";
         }
-        private List<Flights> updateListFlightsDeparture(List<Flights> flights)
+        private List<Flights> updateListFlightsDeparture(List<Flights> flights) // метод для редактирования списка по начальному маршруту
         {
             List<Flights> listFlight = new List<Flights>();
             foreach (Flights flight in flights)
@@ -195,7 +209,7 @@ namespace Airport.Pages
             imDeparture_point.Visibility = Visibility.Visible;
             return listFlight;
         }
-        private List<Flights> updateListFlightsArrival(List<Flights> flights)
+        private List<Flights> updateListFlightsArrival(List<Flights> flights) // метод для редактирования списка по конечному маршруту
         {
             List<Flights> listFlight = new List<Flights>();
             foreach (Flights flight in flights)
@@ -211,20 +225,20 @@ namespace Airport.Pages
             return listFlight;
         }
 
-        private List<Flights> updateListFlightsDate(List<Flights> flights)
+        private List<Flights> updateListFlightsDate(List<Flights> flights) // метод для редактирования списка по дате рейса
         {
             List<Flights> listFlight = flights.Where(x => x.departure_date == dpDay.SelectedDate).ToList();
             listFlight.OrderBy(x => x.departure_time);
             return listFlight;
         }
 
-        private void imDeparture_point_MouseDown(object sender, MouseButtonEventArgs e)
+        private void imDeparture_point_MouseDown(object sender, MouseButtonEventArgs e) // метод который выполняет действие при нажатие на крестик (очищает пункт отправления)
         {
             imDeparture_point.Visibility = Visibility.Collapsed;
             cbDeparture_point.SelectedItem = null;
         }
 
-        private void imArrival_point_MouseDown(object sender, MouseButtonEventArgs e)
+        private void imArrival_point_MouseDown(object sender, MouseButtonEventArgs e) // метод который выполняет действие при нажатие на крестик (очищает пункт прибытия)
         {
             imArrival_point.Visibility = Visibility.Collapsed;
             cbArrival_point.SelectedItem = null;
@@ -232,7 +246,12 @@ namespace Airport.Pages
 
         private void cbFlight_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(cbFlight.SelectedItem != null)
+            GetCostTicket();
+        }
+
+        private void GetCostTicket() // автоматический подсчёт стоимости билета с применёнными к нему скидками
+        {
+            if (cbFlight.SelectedItem != null) // если указан рейс
             {
                 Flights flight = Base.BE.Flights.FirstOrDefault(x => x.id_flight == ((Airport.Flights)cbFlight.SelectedItem).id_flight);
                 double summa = 0;
@@ -240,7 +259,7 @@ namespace Airport.Pages
                 {
                     summa += discount.value;
                 }
-                if(summa > 100)
+                if (summa > 100)
                 {
                     summa = 100;
                 }
@@ -253,7 +272,7 @@ namespace Airport.Pages
             }
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        private void btnAdd_Click(object sender, RoutedEventArgs e) // добавление или изменение билета в базе
         {
             try
             {
@@ -306,12 +325,63 @@ namespace Airport.Pages
                     Base.BE.ApplicationOfDiscounts.Add(AD);
                 }
                 Base.BE.SaveChanges();
-                MessageBox.Show("Запись добавлена в базу");
+                if(flagUpdate == true)
+                {
+                    MessageBox.Show("Запись успешно изменена");
+                }
+                else
+                {
+                    MessageBox.Show("Запись добавлена в базу");
+                }
             }
             catch
             {
-                MessageBox.Show("При добавление данных возникла ошибка");
+                if (flagUpdate == true)
+                {
+                    MessageBox.Show("При изменение данных возникла ошибка");
+                }
+                else
+                {
+                    MessageBox.Show("При добавление данных возникла ошибка");
+                }
             }
+        }
+
+        private double GetSummaDiscounts()
+        {
+            double summa = 0;
+            foreach (Discounts discount in lbDiscount.SelectedItems)
+            {
+                summa += discount.value;
+            }
+            if (summa > 100)
+            {
+                summa = 100;
+            }
+            return summa;
+        }
+
+        private void lbDiscount_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(flugExceededDiscount == true)
+            {
+                foreach (Discounts discount in applicationOfDiscounts)
+                {
+                    lbDiscount.SelectedItems.Add(discount);
+                }
+                flugExceededDiscount = false;
+            }
+            if (GetSummaDiscounts() < 100)
+            {
+                applicationOfDiscounts = lbDiscount.SelectedItems;
+            }
+            else
+            {
+                MessageBox.Show("Сумма скидок превысила 100%");
+                lbDiscount.SelectedItems.Clear();
+                flugExceededDiscount = true;
+            }
+            GetCostTicket();
         }
     }
     
