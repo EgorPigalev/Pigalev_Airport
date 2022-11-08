@@ -54,18 +54,40 @@ namespace Airport.Pages
             cbEmployee.SelectedValuePath = "id_employee";
             cbEmployee.DisplayMemberPath = "FIO";
 
-            Employees employee = Base.BE.Employees.FirstOrDefault(x => x.login == MainMenuPage.LoginUser);
-            cbEmployee.SelectedValue = employee.id_employee; // По умолчанию под каким пользователем вошёл, тот и кассир
-
             lbDiscount.ItemsSource = Base.BE.Discounts.ToList();
         }
-
-        public AddTickets()
+        
+        public AddTickets() // конструктор для покупки нового билета (без аргументов)
         {
             InitializeComponent();
             uploadFields();
+
+            Employees employee = Base.BE.Employees.FirstOrDefault(x => x.login == MainMenuPage.LoginUser);
+            cbEmployee.SelectedValue = employee.id_employee; // по умолчанию под каким пользователем вошёл, тот и кассир
         }
 
+        public AddTickets(Box_Offic ticket) // конструктор для редактирования данных о купленном билете (с аргументом, который хранит информацию о билете)
+        {
+            InitializeComponent();
+            uploadFields();
+            flagUpdate = true;
+            this.ticket = ticket;
+            cbFlight.SelectedValue = ticket.id_flight;
+            cbPassenger.SelectedValue = ticket.id_passenger; 
+            cbEmployee.SelectedValue = ticket.id_employee;
+
+            List<ApplicationOfDiscounts> ad = Base.BE.ApplicationOfDiscounts.Where(x => x.id_ticket == ticket.id_ticket).ToList();
+
+            foreach (Discounts discount in lbDiscount.Items)
+            {
+                if (ad.FirstOrDefault(x => x.id_discount == discount.id_discount) != null)
+                {
+                    lbDiscount.SelectedItems.Add(discount);
+                }
+            }
+
+            imHeaderTicket.Source = new BitmapImage(new Uri("..\\Resources\\icon_updTicket.png", UriKind.Relative));
+        }
         private void BtnBack_Click(object sender, RoutedEventArgs e)
         {
             Frameclass.MainFrame.Navigate(new ListOfTickets());
@@ -223,7 +245,7 @@ namespace Airport.Pages
                     summa = 100;
                 }
                 double price = flight.cost - ((flight.cost / 100) * summa);
-                tbPrice.Text = "Стоимость билета составит: " + price + " руб.";
+                tbPrice.Text = "Стоимость билета: " + price + " руб.";
             }
             else
             {

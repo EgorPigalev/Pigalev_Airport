@@ -246,6 +246,7 @@
       <DependentUpon>BaseData.edmx</DependentUpon>
       <LastGenOutput>BaseData.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\icon_updTicket.png" />
     <Resource Include="Resources\icon_clear_search_flight.png" />
     <Resource Include="Resources\icon_ticket.png" />
     <Resource Include="Resources\icon_addTicket.png" />

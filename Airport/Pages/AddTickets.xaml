@@ -28,7 +28,7 @@
                 <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                <Image Height="100" Width="100" Source="..\Resources\icon_addTicket.png"/>
+                <Image x:Name="imHeaderTicket" Height="100" Width="100" Source="..\Resources\icon_addTicket.png"/>
                 <TextBlock Style="{StaticResource ResourceKey=tbHeader}" VerticalAlignment="Center" Margin="10, 0, 0, 0">Добавление билета в каcсу</TextBlock>
             </StackPanel>
             <StackPanel Grid.Row="1">

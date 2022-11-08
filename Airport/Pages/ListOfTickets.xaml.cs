@@ -92,7 +92,10 @@ namespace Airport
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-
+            Button btn = (Button)sender;
+            int index = Convert.ToInt32(btn.Uid);
+            Box_Offic ticket = Base.BE.Box_Offic.FirstOrDefault(x => x.id_ticket == index);
+            Frameclass.MainFrame.Navigate(new AddTickets(ticket));
         }
     }
 }
