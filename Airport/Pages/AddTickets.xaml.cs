@@ -14,6 +14,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
@@ -27,8 +28,6 @@ namespace Airport.Pages
     {
         Box_Offic ticket;
         bool flagUpdate = false;
-        System.Collections.IList applicationOfDiscounts;
-        bool flugExceededDiscount = false;
         
         int CountTickets(int index) // Проверка на вместительность самолёта по этому маршруту
         {
@@ -58,6 +57,9 @@ namespace Airport.Pages
             cbEmployee.DisplayMemberPath = "FIO";
 
             lbDiscount.ItemsSource = Base.BE.Discounts.ToList();
+
+            btnClear.ToolTip = "Очистка всех полей";
+            btnAdd.ToolTip = "Добавить новый билет в базу";
         }
         
         public AddTickets() // конструктор для покупки нового билета (без аргументов)
@@ -89,11 +91,12 @@ namespace Airport.Pages
                 }
             }
 
-            applicationOfDiscounts = lbDiscount.SelectedItems;
             imHeaderTicket.Source = new BitmapImage(new Uri("..\\Resources\\icon_updTicket.png", UriKind.Relative));
             tbHeaderTiket.Text = "Редактирование билета в кассе";
             btnClear.Content = "Отмена";
             btnAdd.Content = "Изменить";
+            btnClear.ToolTip = "Возврат всех полей к исходным";
+            btnAdd.ToolTip = "Изменить существующий билет";
         }
         private void BtnBack_Click(object sender, RoutedEventArgs e) // кнопка назад
         {
@@ -254,15 +257,7 @@ namespace Airport.Pages
             if (cbFlight.SelectedItem != null) // если указан рейс
             {
                 Flights flight = Base.BE.Flights.FirstOrDefault(x => x.id_flight == ((Airport.Flights)cbFlight.SelectedItem).id_flight);
-                double summa = 0;
-                foreach (Discounts discount in lbDiscount.SelectedItems)
-                {
-                    summa += discount.value;
-                }
-                if (summa > 100)
-                {
-                    summa = 100;
-                }
+                double summa = GetSummaDiscounts();
                 double price = flight.cost - ((flight.cost / 100) * summa);
                 tbPrice.Text = "Стоимость билета: " + price + " руб.";
             }
@@ -347,41 +342,29 @@ namespace Airport.Pages
             }
         }
 
-        private double GetSummaDiscounts()
+        private double GetSummaDiscounts() // подсчёт суммы установленных скидок
         {
             double summa = 0;
             foreach (Discounts discount in lbDiscount.SelectedItems)
             {
                 summa += discount.value;
             }
-            if (summa > 100)
-            {
-                summa = 100;
-            }
             return summa;
         }
 
         private void lbDiscount_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(flugExceededDiscount == true)
+            Discounts d = new Discounts(); // последний выбранный элемент
+            foreach(Discounts discount in lbDiscount.SelectedItems)
             {
-                foreach (Discounts discount in applicationOfDiscounts)
-                {
-                    lbDiscount.SelectedItems.Add(discount);
-                }
-                flugExceededDiscount = false;
+                d = discount;
             }
-            if (GetSummaDiscounts() < 100)
+            if(GetSummaDiscounts() > 100) // если сумма скидки превышает 100%, то убираем последнюю выбранную
             {
-                applicationOfDiscounts = lbDiscount.SelectedItems;
+                MessageBox.Show("Сумма скидок превысила 100%!");
+                lbDiscount.SelectedItems.Remove(d);
             }
-            else
-            {
-                MessageBox.Show("Сумма скидок превысила 100%");
-                lbDiscount.SelectedItems.Clear();
-                flugExceededDiscount = true;
-            }
-            GetCostTicket();
+            GetCostTicket(); // пересчет цены билета
         }
     }
     

@@ -32,7 +32,7 @@
                 <TextBlock x:Name="tbHeaderTiket" Style="{StaticResource ResourceKey=tbHeader}" VerticalAlignment="Center" Margin="10, 0, 0, 0">Добавление билета в каcсу</TextBlock>
             </StackPanel>
             <StackPanel Grid.Row="1">
-                <GroupBox Header="Поиск рейса" Width="900">
+                <GroupBox Header="Поиск рейса" Width="900" ToolTip="Поля поиска предназначены для отбора рейсов">
                     <StackPanel Orientation="Horizontal">
                         <StackPanel Style="{StaticResource ResourceKey=spAddTicketsRoute}">
                             <TextBlock Text="От" HorizontalAlignment="Center"/>
@@ -70,7 +70,7 @@
                     </StackPanel>
                 </GroupBox>
                 <GroupBox Header="Добавление скидки" Width="900">
-                    <ListBox Name="lbDiscount" SelectionMode="Multiple" Height="150" SelectionChanged="lbDiscount_SelectionChanged">
+                    <ListBox Name="lbDiscount" SelectionMode="Multiple" Height="150" SelectionChanged="lbDiscount_SelectionChanged" ToolTip="Максимально возможная сумма скидок равна 100%">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
@@ -84,7 +84,7 @@
                 <TextBlock Name="tbPrice" Text="Здесь будет указана стоимость билета" HorizontalAlignment="Center" FontSize="32"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="btnClear" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Очистить" Click="btnClear_Click"/>
+                <Button x:Name="btnClear" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Очистить" Click="btnClear_Click" Cursor="Hand"/>
                 <Button x:Name="btnAdd" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Добавить" Click="btnAdd_Click" Cursor="Hand"/>
             </StackPanel>
         </Grid>
