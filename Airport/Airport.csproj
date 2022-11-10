@@ -95,6 +95,9 @@
     <Compile Include="Employees.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmployeesPhoto.cs">
+      <DependentUpon>BaseData.tt</DependentUpon>
+    </Compile>
     <Compile Include="Flights.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
@@ -116,12 +119,15 @@
     <Compile Include="Classes\PartialTickets.cs" />
     <Compile Include="Classes\PartialEmployess.cs" />
     <Compile Include="Classes\PartialPassengers.cs" />
-    <Compile Include="PartialFlights.cs" />
+    <Compile Include="Classes\PartialFlights.cs" />
     <Compile Include="Passengers.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
     <Compile Include="Passport_deta.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\PersonalAccountPage.xaml.cs">
+      <DependentUpon>PersonalAccountPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Planes.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
@@ -179,6 +185,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SeeUsers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PersonalAccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -246,6 +256,7 @@
       <DependentUpon>BaseData.edmx</DependentUpon>
       <LastGenOutput>BaseData.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\icon_people.png" />
     <Resource Include="Resources\icon_updTicket.png" />
     <Resource Include="Resources\icon_clear_search_flight.png" />
     <Resource Include="Resources\icon_ticket.png" />
@@ -255,7 +266,6 @@
     <Resource Include="Resources\clear_logo.png" />
     <Resource Include="Resources\color_night_flight.png" />
     <Resource Include="Resources\color_day_flight.png" />
-    <Resource Include="Resources\icon_people.png" />
     <Resource Include="Resources\icon_date_time.png" />
     <Resource Include="Resources\icon_route.png" />
     <Resource Include="Resources\icon_user.png" />

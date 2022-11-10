@@ -12,15 +12,13 @@ namespace Airport
     using System;
     using System.Collections.Generic;
     
-    public partial class Passport_deta
+    public partial class EmployeesPhoto
     {
-        public int id_passport_deta { get; set; }
-        public Nullable<int> series { get; set; }
-        public Nullable<int> nomer { get; set; }
-        public Nullable<System.DateTime> date_issue { get; set; }
-        public string division_code { get; set; }
+        public int id_photo { get; set; }
+        public int id_employee { get; set; }
+        public string photo_path { get; set; }
+        public byte[] photo_binary { get; set; }
     
         public virtual Employees Employees { get; set; }
-        public virtual Passengers Passengers { get; set; }
     }
 }

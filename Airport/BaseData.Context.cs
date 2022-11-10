@@ -30,6 +30,7 @@ namespace Airport
         public virtual DbSet<Citys> Citys { get; set; }
         public virtual DbSet<Discounts> Discounts { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<EmployeesPhoto> EmployeesPhoto { get; set; }
         public virtual DbSet<Flights> Flights { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Passengers> Passengers { get; set; }

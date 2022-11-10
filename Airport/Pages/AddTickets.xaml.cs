@@ -28,7 +28,7 @@ namespace Airport.Pages
     {
         Box_Offic ticket;
         bool flagUpdate = false;
-        
+        Employees User;
         int CountTickets(int index) // Проверка на вместительность самолёта по этому маршруту
         {
             List<Box_Offic> CountTickets = Base.BE.Box_Offic.Where(x => x.id_flight == index).ToList();
@@ -62,18 +62,18 @@ namespace Airport.Pages
             btnAdd.ToolTip = "Добавить новый билет в базу";
         }
         
-        public AddTickets() // конструктор для покупки нового билета (без аргументов)
+        public AddTickets(Employees User) // конструктор для покупки нового билета
         {
             InitializeComponent();
             uploadFields();
-
-            Employees employee = Base.BE.Employees.FirstOrDefault(x => x.login == MainMenuPage.LoginUser);
-            cbEmployee.SelectedValue = employee.id_employee; // по умолчанию под каким пользователем вошёл, тот и кассир
+            this.User = User;
+            cbEmployee.SelectedValue = User.id_employee; // по умолчанию под каким пользователем вошёл, тот и кассир
         }
 
-        public AddTickets(Box_Offic ticket) // конструктор для редактирования данных о купленном билете (с аргументом, который хранит информацию о билете)
+        public AddTickets(Box_Offic ticket, Employees User) // конструктор для редактирования данных о купленном билете (с аргументом, который хранит информацию о билете)
         {
             InitializeComponent();
+            this.User = User;
             uploadFields();
             flagUpdate = true;
             this.ticket = ticket;
@@ -100,14 +100,14 @@ namespace Airport.Pages
         }
         private void BtnBack_Click(object sender, RoutedEventArgs e) // кнопка назад
         {
-            Frameclass.MainFrame.Navigate(new ListOfTickets());
+            Frameclass.MainFrame.Navigate(new ListOfTickets(User));
         }
 
         private void btnClear_Click(object sender, RoutedEventArgs e)
         {
             if (flagUpdate == true) // если это изменение, то кнопка возвращает все данные к исходным, которые в базе
             {
-                Frameclass.MainFrame.Navigate(new AddTickets(ticket));
+                Frameclass.MainFrame.Navigate(new AddTickets(ticket, User));
             }
             else // если происходит добавление, то эта кнопка очищает все поля
             {
@@ -293,7 +293,12 @@ namespace Airport.Pages
                 ticket.id_flight = Convert.ToInt32(cbFlight.SelectedValue);
                 ticket.id_employee = Convert.ToInt32(cbEmployee.SelectedValue);
                 ticket.id_passenger = Convert.ToInt32(cbPassenger.SelectedValue);
-                ticket.date_of_sale = DateTime.Now;
+
+                if(flagUpdate == false)
+                {
+                    ticket.date_of_sale = DateTime.Now;
+
+                }
 
                 if (flagUpdate == false)
                 {

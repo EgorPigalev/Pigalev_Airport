@@ -18,6 +18,7 @@ namespace Airport
         public Employees()
         {
             this.Box_Offic = new HashSet<Box_Offic>();
+            this.EmployeesPhoto = new HashSet<EmployeesPhoto>();
         }
     
         public int id_employee { get; set; }
@@ -30,11 +31,13 @@ namespace Airport
         public string login { get; set; }
         public int password { get; set; }
         public int id_role { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Box_Offic> Box_Offic { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual Roles Roles { get; set; }
         public virtual Passport_deta Passport_deta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmployeesPhoto> EmployeesPhoto { get; set; }
     }
 }

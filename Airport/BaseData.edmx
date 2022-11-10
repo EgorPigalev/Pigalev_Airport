@@ -42,7 +42,7 @@
           <Key>
             <PropertyRef Name="id_employee" />
           </Key>
-          <Property Name="id_employee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_employee" Type="int" Nullable="false" />
           <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="patronomic" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -52,6 +52,15 @@
           <Property Name="login" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="password" Type="int" Nullable="false" />
           <Property Name="id_role" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmployeesPhoto">
+          <Key>
+            <PropertyRef Name="id_photo" />
+          </Key>
+          <Property Name="id_photo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_employee" Type="int" Nullable="false" />
+          <Property Name="photo_path" Type="nvarchar" MaxLength="100" />
+          <Property Name="photo_binary" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Flights">
           <Key>
@@ -75,7 +84,7 @@
           <Key>
             <PropertyRef Name="id_passenger" />
           </Key>
-          <Property Name="id_passenger" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_passenger" Type="int" Nullable="false" />
           <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="patronomic" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -87,11 +96,11 @@
           <Key>
             <PropertyRef Name="id_passport_deta" />
           </Key>
-          <Property Name="id_passport_deta" Type="int" Nullable="false" />
-          <Property Name="series" Type="int" Nullable="false" />
-          <Property Name="room" Type="int" Nullable="false" />
-          <Property Name="date_issue" Type="date" Nullable="false" />
-          <Property Name="division_code" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="id_passport_deta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="series" Type="int" />
+          <Property Name="nomer" Type="int" />
+          <Property Name="date_issue" Type="date" />
+          <Property Name="division_code" Type="nvarchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Planes">
           <Key>
@@ -148,9 +157,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BoxOffic_Cashiers">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
           <End Role="Box_Offic" Type="Self.Box_Offic" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -202,9 +209,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cashiers_Roles">
-          <End Role="Roles" Type="Self.Roles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
@@ -212,6 +217,32 @@
             </Principal>
             <Dependent Role="Employees">
               <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Passport_deta">
+          <End Role="Passport_deta" Type="Self.Passport_deta" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Passport_deta">
+              <PropertyRef Name="id_passport_deta" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeesPhoto_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="EmployeesPhoto" Type="Self.EmployeesPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="id_employee" />
+            </Principal>
+            <Dependent Role="EmployeesPhoto">
+              <PropertyRef Name="id_employee" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -257,31 +288,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Passport_deta_Employees">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1">
+        <Association Name="FK_Passengers_Passport_deta">
+          <End Role="Passport_deta" Type="Self.Passport_deta" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="Passport_deta" Type="Self.Passport_deta" Multiplicity="0..1" />
+          <End Role="Passengers" Type="Self.Passengers" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="Employees">
-              <PropertyRef Name="id_employee" />
-            </Principal>
-            <Dependent Role="Passport_deta">
+            <Principal Role="Passport_deta">
               <PropertyRef Name="id_passport_deta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Passport_deta_Passengers">
-          <End Role="Passengers" Type="Self.Passengers" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="Passport_deta" Type="Self.Passport_deta" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Passengers">
+            </Principal>
+            <Dependent Role="Passengers">
               <PropertyRef Name="id_passenger" />
-            </Principal>
-            <Dependent Role="Passport_deta">
-              <PropertyRef Name="id_passport_deta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -317,6 +334,7 @@
           <EntitySet Name="Citys" EntityType="Self.Citys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Discounts" EntityType="Self.Discounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeesPhoto" EntityType="Self.EmployeesPhoto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Flights" EntityType="Self.Flights" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gender" EntityType="Self.Gender" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Passengers" EntityType="Self.Passengers" Schema="dbo" store:Type="Tables" />
@@ -352,6 +370,14 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
+          <AssociationSet Name="FK_Employees_Passport_deta" Association="Self.FK_Employees_Passport_deta">
+            <End Role="Passport_deta" EntitySet="Passport_deta" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeesPhoto_Employees" Association="Self.FK_EmployeesPhoto_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmployeesPhoto" EntitySet="EmployeesPhoto" />
+          </AssociationSet>
           <AssociationSet Name="FK_Flights_Planes" Association="Self.FK_Flights_Planes">
             <End Role="Planes" EntitySet="Planes" />
             <End Role="Flights" EntitySet="Flights" />
@@ -364,13 +390,9 @@
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Passengers" EntitySet="Passengers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Passport_deta_Employees" Association="Self.FK_Passport_deta_Employees">
-            <End Role="Employees" EntitySet="Employees" />
+          <AssociationSet Name="FK_Passengers_Passport_deta" Association="Self.FK_Passengers_Passport_deta">
             <End Role="Passport_deta" EntitySet="Passport_deta" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Passport_deta_Passengers" Association="Self.FK_Passport_deta_Passengers">
             <End Role="Passengers" EntitySet="Passengers" />
-            <End Role="Passport_deta" EntitySet="Passport_deta" />
           </AssociationSet>
           <AssociationSet Name="FK_Routes_Citys" Association="Self.FK_Routes_Citys">
             <End Role="Citys" EntitySet="Citys" />
@@ -391,6 +413,7 @@
           <EntitySet Name="Citys" EntityType="BaseDataModel.Citys" />
           <EntitySet Name="Discounts" EntityType="BaseDataModel.Discounts" />
           <EntitySet Name="Employees" EntityType="BaseDataModel.Employees" />
+          <EntitySet Name="EmployeesPhoto" EntityType="BaseDataModel.EmployeesPhoto" />
           <EntitySet Name="Flights" EntityType="BaseDataModel.Flights" />
           <EntitySet Name="Gender" EntityType="BaseDataModel.Gender" />
           <EntitySet Name="Passengers" EntityType="BaseDataModel.Passengers" />
@@ -434,9 +457,13 @@
             <End Role="Roles" EntitySet="Roles" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="FK_Passport_deta_Employees" Association="BaseDataModel.FK_Passport_deta_Employees">
-            <End Role="Employees" EntitySet="Employees" />
+          <AssociationSet Name="FK_Employees_Passport_deta" Association="BaseDataModel.FK_Employees_Passport_deta">
             <End Role="Passport_deta" EntitySet="Passport_deta" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeesPhoto_Employees" Association="BaseDataModel.FK_EmployeesPhoto_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="EmployeesPhoto" EntitySet="EmployeesPhoto" />
           </AssociationSet>
           <AssociationSet Name="FK_Flights_Planes" Association="BaseDataModel.FK_Flights_Planes">
             <End Role="Planes" EntitySet="Planes" />
@@ -450,9 +477,9 @@
             <End Role="Gender" EntitySet="Gender" />
             <End Role="Passengers" EntitySet="Passengers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Passport_deta_Passengers" Association="BaseDataModel.FK_Passport_deta_Passengers">
-            <End Role="Passengers" EntitySet="Passengers" />
+          <AssociationSet Name="FK_Passengers_Passport_deta" Association="BaseDataModel.FK_Passengers_Passport_deta">
             <End Role="Passport_deta" EntitySet="Passport_deta" />
+            <End Role="Passengers" EntitySet="Passengers" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="ApplicationOfDiscounts">
@@ -501,7 +528,7 @@
           <Key>
             <PropertyRef Name="id_employee" />
           </Key>
-          <Property Name="id_employee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_employee" Type="Int32" Nullable="false" />
           <Property Name="surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="patronomic" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -514,7 +541,18 @@
           <NavigationProperty Name="Box_Offic" Relationship="BaseDataModel.FK_BoxOffic_Cashiers" FromRole="Employees" ToRole="Box_Offic" />
           <NavigationProperty Name="Gender" Relationship="BaseDataModel.FK_Cashiers_Gender" FromRole="Employees" ToRole="Gender" />
           <NavigationProperty Name="Roles" Relationship="BaseDataModel.FK_Cashiers_Roles" FromRole="Employees" ToRole="Roles" />
-          <NavigationProperty Name="Passport_deta" Relationship="BaseDataModel.FK_Passport_deta_Employees" FromRole="Employees" ToRole="Passport_deta" />
+          <NavigationProperty Name="Passport_deta" Relationship="BaseDataModel.FK_Employees_Passport_deta" FromRole="Employees" ToRole="Passport_deta" />
+          <NavigationProperty Name="EmployeesPhoto" Relationship="BaseDataModel.FK_EmployeesPhoto_Employees" FromRole="Employees" ToRole="EmployeesPhoto" />
+        </EntityType>
+        <EntityType Name="EmployeesPhoto">
+          <Key>
+            <PropertyRef Name="id_photo" />
+          </Key>
+          <Property Name="id_photo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_employee" Type="Int32" Nullable="false" />
+          <Property Name="photo_path" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="photo_binary" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Employees" Relationship="BaseDataModel.FK_EmployeesPhoto_Employees" FromRole="EmployeesPhoto" ToRole="Employees" />
         </EntityType>
         <EntityType Name="Flights">
           <Key>
@@ -543,7 +581,7 @@
           <Key>
             <PropertyRef Name="id_passenger" />
           </Key>
-          <Property Name="id_passenger" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_passenger" Type="Int32" Nullable="false" />
           <Property Name="surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="patronomic" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -552,19 +590,19 @@
           <Property Name="phone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Box_Offic" Relationship="BaseDataModel.FK_BoxOffic_Passengers" FromRole="Passengers" ToRole="Box_Offic" />
           <NavigationProperty Name="Gender" Relationship="BaseDataModel.FK_Passengers_Gender" FromRole="Passengers" ToRole="Gender" />
-          <NavigationProperty Name="Passport_deta" Relationship="BaseDataModel.FK_Passport_deta_Passengers" FromRole="Passengers" ToRole="Passport_deta" />
+          <NavigationProperty Name="Passport_deta" Relationship="BaseDataModel.FK_Passengers_Passport_deta" FromRole="Passengers" ToRole="Passport_deta" />
         </EntityType>
         <EntityType Name="Passport_deta">
           <Key>
             <PropertyRef Name="id_passport_deta" />
           </Key>
-          <Property Name="id_passport_deta" Type="Int32" Nullable="false" />
-          <Property Name="series" Type="Int32" Nullable="false" />
-          <Property Name="room" Type="Int32" Nullable="false" />
-          <Property Name="date_issue" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="division_code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Employees" Relationship="BaseDataModel.FK_Passport_deta_Employees" FromRole="Passport_deta" ToRole="Employees" />
-          <NavigationProperty Name="Passengers" Relationship="BaseDataModel.FK_Passport_deta_Passengers" FromRole="Passport_deta" ToRole="Passengers" />
+          <Property Name="id_passport_deta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="series" Type="Int32" />
+          <Property Name="nomer" Type="Int32" />
+          <Property Name="date_issue" Type="DateTime" Precision="0" />
+          <Property Name="division_code" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="BaseDataModel.FK_Employees_Passport_deta" FromRole="Passport_deta" ToRole="Employees" />
+          <NavigationProperty Name="Passengers" Relationship="BaseDataModel.FK_Passengers_Passport_deta" FromRole="Passport_deta" ToRole="Passengers" />
         </EntityType>
         <EntityType Name="Planes">
           <Key>
@@ -626,9 +664,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BoxOffic_Cashiers">
-          <End Type="BaseDataModel.Employees" Role="Employees" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Type="BaseDataModel.Employees" Role="Employees" Multiplicity="1" />
           <End Type="BaseDataModel.Box_Offic" Role="Box_Offic" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -706,9 +742,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cashiers_Roles">
-          <End Type="BaseDataModel.Roles" Role="Roles" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+          <End Type="BaseDataModel.Roles" Role="Roles" Multiplicity="1" />
           <End Type="BaseDataModel.Employees" Role="Employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Roles">
@@ -719,17 +753,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Passport_deta_Employees">
-          <End Type="BaseDataModel.Employees" Role="Employees" Multiplicity="1">
+        <Association Name="FK_Employees_Passport_deta">
+          <End Type="BaseDataModel.Passport_deta" Role="Passport_deta" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="BaseDataModel.Passport_deta" Role="Passport_deta" Multiplicity="0..1" />
+          <End Type="BaseDataModel.Employees" Role="Employees" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Passport_deta">
+              <PropertyRef Name="id_passport_deta" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="id_employee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeesPhoto_Employees">
+          <End Type="BaseDataModel.Employees" Role="Employees" Multiplicity="1" />
+          <End Type="BaseDataModel.EmployeesPhoto" Role="EmployeesPhoto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
               <PropertyRef Name="id_employee" />
             </Principal>
-            <Dependent Role="Passport_deta">
-              <PropertyRef Name="id_passport_deta" />
+            <Dependent Role="EmployeesPhoto">
+              <PropertyRef Name="id_employee" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -775,17 +821,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Passport_deta_Passengers">
-          <End Type="BaseDataModel.Passengers" Role="Passengers" Multiplicity="1">
+        <Association Name="FK_Passengers_Passport_deta">
+          <End Type="BaseDataModel.Passport_deta" Role="Passport_deta" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Type="BaseDataModel.Passport_deta" Role="Passport_deta" Multiplicity="0..1" />
+          <End Type="BaseDataModel.Passengers" Role="Passengers" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="Passengers">
-              <PropertyRef Name="id_passenger" />
-            </Principal>
-            <Dependent Role="Passport_deta">
+            <Principal Role="Passport_deta">
               <PropertyRef Name="id_passport_deta" />
+            </Principal>
+            <Dependent Role="Passengers">
+              <PropertyRef Name="id_passenger" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -848,6 +894,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EmployeesPhoto">
+            <EntityTypeMapping TypeName="BaseDataModel.EmployeesPhoto">
+              <MappingFragment StoreEntitySet="EmployeesPhoto">
+                <ScalarProperty Name="photo_binary" ColumnName="photo_binary" />
+                <ScalarProperty Name="photo_path" ColumnName="photo_path" />
+                <ScalarProperty Name="id_employee" ColumnName="id_employee" />
+                <ScalarProperty Name="id_photo" ColumnName="id_photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Flights">
             <EntityTypeMapping TypeName="BaseDataModel.Flights">
               <MappingFragment StoreEntitySet="Flights">
@@ -886,7 +942,7 @@
               <MappingFragment StoreEntitySet="Passport_deta">
                 <ScalarProperty Name="division_code" ColumnName="division_code" />
                 <ScalarProperty Name="date_issue" ColumnName="date_issue" />
-                <ScalarProperty Name="room" ColumnName="room" />
+                <ScalarProperty Name="nomer" ColumnName="nomer" />
                 <ScalarProperty Name="series" ColumnName="series" />
                 <ScalarProperty Name="id_passport_deta" ColumnName="id_passport_deta" />
               </MappingFragment>

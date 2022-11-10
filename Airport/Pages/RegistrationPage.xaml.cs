@@ -123,8 +123,15 @@ namespace Airport
                     MessageBox.Show("Пользователь с таким логиным уже зарегистрирован!");
                     return;
                 }
+                Passport_deta passport_Deta = new Passport_deta()
+                {
+
+                };
+                Base.BE.Passport_deta.Add(passport_Deta);
+                Base.BE.SaveChanges();
                 Employees employee = new Employees()
                 {
+                    id_employee = passport_Deta.id_passport_deta,
                     surname = tbSurname.Text,
                     name = tbName.Text,
                     patronomic = tbPatronomic.Text,

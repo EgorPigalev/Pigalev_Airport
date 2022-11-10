@@ -80,6 +80,7 @@
         <Style x:Key="tbHeader" TargetType="TextBlock">
             <Style.Setters>
                 <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
                 <Setter Property="FontSize" Value="35"/>
             </Style.Setters>
         </Style>
@@ -126,6 +127,26 @@
                 <Setter Property="Width" Value="30"/>
                 <Setter Property="Cursor" Value="Hand"/>
                 <Setter Property="Visibility" Value="Collapsed"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="bPersonalAccount" TargetType="Border">
+            <Style.Setters>
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="Margin" Value="20"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="tbHeaderBorderPersonalAccount" TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="tbTextPersonalAccount" TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="Margin" Value="5"/>
             </Style.Setters>
         </Style>
     </Application.Resources>

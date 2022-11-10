@@ -20,14 +20,14 @@ namespace Airport
     /// </summary>
     public partial class MainMenuPage : Page
     {
-        public static string LoginUser; // Логин пользователя который вошёл в систему
-        public MainMenuPage()
+        Employees User; // Логин пользователя который вошёл в систему
+        public MainMenuPage(Employees User)
         {
             InitializeComponent();
-            Employees user = Base.BE.Employees.FirstOrDefault(x => x.login == LoginUser);
-            tbRoleUser.Text = tbRoleUser.Text + " " + user.Roles.role;
-            tbFIOUser.Text = user.surname + " " + user.name[0] + ". " + user.patronomic[0] + ".";
-            if(user.Roles.role == "Пользователь")
+            this.User = User;
+            tbRoleUser.Text = tbRoleUser.Text + " " + User.Roles.role;
+            tbFIOUser.Text = User.FIO;
+            if(User.Roles.role == "Пользователь")
             {
                 btnSeeUsers.Visibility = Visibility.Collapsed;
                 btnSeeTickets.Visibility = Visibility.Collapsed;
@@ -41,7 +41,7 @@ namespace Airport
 
         private void btnSeeUsers_Click(object sender, RoutedEventArgs e)
         {
-            Frameclass.MainFrame.Navigate(new SeeUsers());
+            Frameclass.MainFrame.Navigate(new SeeUsers(User));
         }
 
         private void btnExitMainMenu_Click(object sender, RoutedEventArgs e)
@@ -51,7 +51,12 @@ namespace Airport
 
         private void btnSeeTickets_Click(object sender, RoutedEventArgs e)
         {
-            Frameclass.MainFrame.Navigate(new ListOfTickets());
+            Frameclass.MainFrame.Navigate(new ListOfTickets(User));
+        }
+
+        private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Frameclass.MainFrame.Navigate(new PersonalAccountPage(User));
         }
     }
 }

@@ -24,15 +24,17 @@ namespace Airport
     /// </summary>
     public partial class ListOfTickets : Page
     {
-        public ListOfTickets()
+        Employees User;
+        public ListOfTickets(Employees User)
         {
             InitializeComponent();
+            this.User = User;
             lvListTickets.ItemsSource = Base.BE.Box_Offic.ToList();
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            Frameclass.MainFrame.Navigate(new MainMenuPage());
+            Frameclass.MainFrame.Navigate(new MainMenuPage(User));
         }
 
         private void tbDiscounts_Loaded(object sender, RoutedEventArgs e)
@@ -77,7 +79,7 @@ namespace Airport
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            Frameclass.MainFrame.Navigate(new AddTickets());
+            Frameclass.MainFrame.Navigate(new AddTickets(User));
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -87,7 +89,7 @@ namespace Airport
             Box_Offic ticket = Base.BE.Box_Offic.FirstOrDefault(x => x.id_ticket == index);
             Base.BE.Box_Offic.Remove(ticket);         
             Base.BE.SaveChanges();
-            Frameclass.MainFrame.Navigate(new ListOfTickets());
+            Frameclass.MainFrame.Navigate(new ListOfTickets(User));
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
@@ -95,7 +97,7 @@ namespace Airport
             Button btn = (Button)sender;
             int index = Convert.ToInt32(btn.Uid);
             Box_Offic ticket = Base.BE.Box_Offic.FirstOrDefault(x => x.id_ticket == index);
-            Frameclass.MainFrame.Navigate(new AddTickets(ticket));
+            Frameclass.MainFrame.Navigate(new AddTickets(ticket, User));
         }
     }
 }

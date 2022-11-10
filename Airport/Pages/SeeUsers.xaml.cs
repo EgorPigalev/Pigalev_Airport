@@ -20,9 +20,11 @@ namespace Airport
     /// </summary>
     public partial class SeeUsers : Page
     {
-        public SeeUsers()
+        Employees User;
+        public SeeUsers(Employees User)
         {
             InitializeComponent();
+            this.User = User;
             cbGender.ItemsSource = Base.BE.Gender.ToList();
             cbGender.DisplayMemberPath = "gender";
             cbGender.SelectedIndex = 0;
@@ -32,7 +34,7 @@ namespace Airport
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
         {
-            Frameclass.MainFrame.Navigate(new MainMenuPage());
+            Frameclass.MainFrame.Navigate(new MainMenuPage(User));
         }
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
