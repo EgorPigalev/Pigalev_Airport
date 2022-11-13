@@ -24,10 +24,14 @@
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="2*"/>
                 </Grid.RowDefinitions>
-                <Image Height="370" Width="370" Source="../Resources/icon_user.png"/>
+                <Rectangle RadiusX="100" RadiusY="100" Height="370" Width="370">
+                    <Rectangle.Fill>
+                        <ImageBrush x:Name="myImage" ImageSource="../Resources/icon_user.png" Stretch="UniformToFill"/>
+                    </Rectangle.Fill>
+                </Rectangle>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center">
                     <TextBlock x:Name="tbLogin" Text="Логин" HorizontalAlignment="Center" FontSize="28"/>
-                    <Button x:Name="btnChangeImage" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Left" Content="Редактировать картинку" Width="300"/>
+                    <Button x:Name="btnChangeImage" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Left" Content="Редактировать картинку" Width="300" Click="btnChangeImage_Click" Cursor="Hand"/>
                     <TextBlock x:Name="tbDeleteImage" Style="{StaticResource ResourceKey=TBNextRegistration}" HorizontalAlignment="Center" Text="Удалить картинку" Visibility="Collapsed"/>
                 </StackPanel>
             </Grid>
@@ -57,8 +61,8 @@
                             </TextBlock>
                         </Grid>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button x:Name="btnChangeMainData" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Редактировать основные данные" Width="350"/>
-                            <Button x:Name="btnChangeLoginAndPassword" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Редактировать логин и пароль" Width="350" />
+                            <Button x:Name="btnChangeMainData" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Редактировать основные данные" Width="350" Click="btnChangeMainData_Click" Cursor="Hand"/>
+                            <Button x:Name="btnChangeLoginAndPassword" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Редактировать логин и пароль" Width="350" Click="btnChangeLoginAndPassword_Click" Cursor="Hand"/>
                         </StackPanel>
                     </StackPanel>
                 </Border>
@@ -94,7 +98,7 @@
                                 <Run x:Name="tbDivisionCode"/>
                             </TextBlock>
                         </Grid>
-                        <Button x:Name="btnChangePassportData" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Center" Content="Редактировать паспортные данные" Width="350"/>
+                        <Button x:Name="btnChangePassportData" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Center" Content="Редактировать паспортные данные" Width="350" Click="btnChangePassportData_Click"/>
                     </StackPanel>
                 </Border>
             </StackPanel>

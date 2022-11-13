@@ -141,6 +141,15 @@
     <Compile Include="Pages\SeeUsers.xaml.cs">
       <DependentUpon>SeeUsers.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\UpdPassportData.xaml.cs">
+      <DependentUpon>UpdPassportData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\UpdLoginAndPassword.xaml.cs">
+      <DependentUpon>UpdLoginAndPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\UpdMainData.xaml.cs">
+      <DependentUpon>UpdMainData.xaml</DependentUpon>
+    </Compile>
     <Page Include="Pages\AddTickets.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -189,6 +198,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PersonalAccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UpdPassportData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UpdLoginAndPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\UpdMainData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -256,6 +277,7 @@
       <DependentUpon>BaseData.edmx</DependentUpon>
       <LastGenOutput>BaseData.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\upd_personal_account.png" />
     <Resource Include="Resources\icon_people.png" />
     <Resource Include="Resources\icon_updTicket.png" />
     <Resource Include="Resources\icon_clear_search_flight.png" />
@@ -263,7 +285,6 @@
     <Resource Include="Resources\icon_addTicket.png" />
     <Resource Include="Resources\icon_password_not_visible.png" />
     <Resource Include="Resources\icon_password_visible.png" />
-    <Resource Include="Resources\clear_logo.png" />
     <Resource Include="Resources\color_night_flight.png" />
     <Resource Include="Resources\color_day_flight.png" />
     <Resource Include="Resources\icon_date_time.png" />

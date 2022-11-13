@@ -72,7 +72,7 @@
                                 </StackPanel>
                             </GroupBox>
                         </StackPanel>
-                        <TextBlock FontSize="18" HorizontalAlignment="Center"  Margin="0, 5">* - поля обязательные к заполнению</TextBlock>
+                        <TextBlock Style="{StaticResource ResourceKey=tbRequiredFields}">* - поля обязательные к заполнению</TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Margin="40,0,40,0" HorizontalAlignment="Center">
                         <Button x:Name="BtnRegistration" Content="Зарегистироваться" Click="BtnRegistration_Click" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=BtnAuthorizationAndRegistration}" Cursor="Hand"/>

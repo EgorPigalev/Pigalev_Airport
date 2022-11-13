@@ -83,5 +83,31 @@ namespace Airport
         {
             Frameclass.MainFrame.Navigate(new MainMenuPage(User));
         }
+
+        private void btnChangeMainData_Click(object sender, RoutedEventArgs e)
+        {
+            UpdMainData updMainData = new UpdMainData(User);
+            updMainData.ShowDialog();
+            Frameclass.MainFrame.Navigate(new PersonalAccountPage(User));
+        }
+
+        private void btnChangeLoginAndPassword_Click(object sender, RoutedEventArgs e)
+        {
+            UpdLoginAndPassword updLoginAndPassword = new UpdLoginAndPassword(User);
+            updLoginAndPassword.ShowDialog();
+            Frameclass.MainFrame.Navigate(new PersonalAccountPage(User));
+        }
+
+        private void btnChangePassportData_Click(object sender, RoutedEventArgs e)
+        {
+            UpdPassportData updPassportData = new UpdPassportData(User);
+            updPassportData.ShowDialog();
+            Frameclass.MainFrame.Navigate(new PersonalAccountPage(User));
+        }
+
+        private void btnChangeImage_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
