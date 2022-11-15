@@ -19,9 +19,20 @@ namespace Airport
     /// </summary>
     public partial class UpdMainData : Window
     {
+        Employees User;
         public UpdMainData(Employees User)
         {
             InitializeComponent();
+            this.User = User;
+            tbSurname.Text = User.surname;
+            tbName.Text = User.name;
+            tbPatronomic.Text = User.patronomic;
+            cbGender.ItemsSource = Base.BE.Gender.ToList();
+            cbGender.SelectedValuePath = "id_gender";
+            cbGender.DisplayMemberPath = "gender";
+            cbGender.SelectedValue = User.id_gender;
+            dpBrithday.Text = User.date_of_birth.ToString();
+            tbPhone.Text = User.phone;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -29,9 +40,24 @@ namespace Airport
             this.Close();
         }
 
-        private void tbPatronomicPhone_TextChanged(object sender, TextChangedEventArgs e)
+        private void tbPhone_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
+            if (!(Char.IsDigit(e.Text, 0) || (e.Text == "(") || (e.Text == ")") || (e.Text == "+") || (e.Text == "-")))
+            {
+                e.Handled = true;
+            }
+        }
 
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            User.surname = tbSurname.Text;
+            User.name = tbName.Text;
+            User.patronomic = tbPatronomic.Text;
+            User.id_gender = (int)cbGender.SelectedValue;
+            User.date_of_birth = Convert.ToDateTime(dpBrithday.SelectedDate);
+            User.phone = tbPhone.Text;
+            Base.BE.SaveChanges();
+            this.Close();
         }
     }
 }

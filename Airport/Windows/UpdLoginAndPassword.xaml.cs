@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,9 +20,12 @@ namespace Airport
     /// </summary>
     public partial class UpdLoginAndPassword : Window
     {
+        Employees User;
         public UpdLoginAndPassword(Employees User)
         {
             InitializeComponent();
+            this.User = User;
+            tbLogin.Text = User.login;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -105,6 +109,62 @@ namespace Airport
         private void imVisibleNewPasswordRepeated_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             ShowPasswordNewRepeated();
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            int p = pbOldPassword.Password.GetHashCode();
+            Employees employee = Base.BE.Employees.FirstOrDefault(x => x.login == User.login && x.password == p);
+            if (employee == null)
+            {
+                MessageBox.Show("Старый пароль введён не верно!");
+            }
+            else
+            {
+                if(pbNewPassword.Password.ToString() != "")
+                {
+                    Regex regexCapitalLatinCharacter = new Regex("(?=.*[A-Z])"); // Регулярное выражение для проверки наличия 1 заглавного латинского символа
+                    if (regexCapitalLatinCharacter.IsMatch(pbNewPassword.Password.ToString()) == false)
+                    {
+                        MessageBox.Show("Новый пароль должен содержать не менее 1 заглавного латинского символа");
+                        return;
+                    }
+                    Regex regexAtLeastCharacters = new Regex("(?=.*[a-z].*[a-z].*[a-z])"); // Регулярное выражение для проверки наличия 3 строчных латинских символов
+                    if (regexAtLeastCharacters.IsMatch(pbNewPassword.Password.ToString()) == false)
+                    {
+                        MessageBox.Show("Новый пароль должен содержать не менее 3 строчных латинских символов");
+                        return;
+                    }
+                    Regex regexAtLeastDigits = new Regex("(?=.*[0-9].*[0-9])"); // Регулярное выражение для проверки наличия 2 цифр
+                    if (regexAtLeastDigits.IsMatch(pbNewPassword.Password.ToString()) == false)
+                    {
+                        MessageBox.Show("Новый пароль должен содержать не менее 2 цифр");
+                        return;
+                    }
+                    Regex regexSpecialСharacter = new Regex("(?=.*[!@#$&*])"); // Регулярное выражение для проверки наличия 1 спец. символа
+                    if (regexSpecialСharacter.IsMatch(pbNewPassword.Password.ToString()) == false)
+                    {
+                        MessageBox.Show("Новый пароль должен содержать не менее 1 спец. символа");
+                        return;
+                    }
+                    Regex regexLength = new Regex(".{8,}"); // Регулярное выражение для проверки длины пароля
+                    if (regexSpecialСharacter.IsMatch(pbNewPassword.Password.ToString()) == false)
+                    {
+                        MessageBox.Show("Общая длина нового пароля должна быть не менее 8 символов");
+                        return;
+                    }
+                    if (pbNewPassword.Password.ToString() != pbNewPasswordRepeated.Password.ToString())
+                    {
+                        MessageBox.Show("Пароль не подтверждён!");
+                        return;
+                    }
+                    User.password = pbNewPassword.Password.GetHashCode();
+                }
+                User.login = tbLogin.Text;
+                Base.BE.SaveChanges();
+                this.Close();
+                MessageBox.Show("Данные успешно обнавлены");
+            }
         }
     }
 }

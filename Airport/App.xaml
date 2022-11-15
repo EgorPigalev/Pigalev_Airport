@@ -175,5 +175,25 @@
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="Margin" Value="0, 5"/>
         </Style>
+        <Style x:Key="butPersonalAccountBack" TargetType="Button" BasedOn="{StaticResource BtnStyle}">
+            <Style.Setters>
+                <Setter Property="Width" Value="150"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="Content" Value="Назад"/>
+                <Setter Property="Margin" Value="50, 0, 0 ,0"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="butPersonalAccountUpd" TargetType="Button" BasedOn="{StaticResource BtnStyle}">
+            <Style.Setters>
+                <Setter Property="Width" Value="150"/>
+                <Setter Property="Height" Value="40"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="Content" Value="Изменить"/>
+                <Setter Property="Margin" Value="0, 0, 50 ,0"/>
+            </Style.Setters>
+        </Style>
     </Application.Resources>
 </Application>

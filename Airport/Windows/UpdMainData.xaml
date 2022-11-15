@@ -50,15 +50,15 @@
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="2"  Margin="10">
                 <TextBlock Text="Телефон" HorizontalAlignment="Center"/>
-                <TextBox x:Name="tbPatronomicPhone" MaxLength="16"/>
+                <TextBox x:Name="tbPhone" MaxLength="16" PreviewTextInput="tbPhone_PreviewTextInput"/>
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="2">
             <TextBlock Style="{StaticResource ResourceKey=tbRequiredFields}">* - поля обязательные к заполнению</TextBlock>
         </StackPanel>
         <Grid Grid.Row="3">
-            <Button x:Name="btnBack" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Left" Content="Назад" Margin="50, 0, 0 ,0" Click="btnBack_Click"/>
-            <Button x:Name="btnAdd" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Right" Content="Добавить" Margin="0, 0, 50 ,0"/>
+            <Button x:Name="btnBack" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=butPersonalAccountBack}" Click="btnBack_Click"/>
+            <Button x:Name="btnAdd" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=butPersonalAccountUpd}" Click="btnAdd_Click"/>
         </Grid>
     </Grid>
 </Window>
