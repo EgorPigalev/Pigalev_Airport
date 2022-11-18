@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Brushes = System.Windows.Media.Brushes;
 
 namespace Airport
 {
@@ -21,6 +25,18 @@ namespace Airport
     public partial class PersonalAccountPage:Page
     {
         Employees User;
+        void showImage(byte[] Barray, ImageBrush img)
+        {
+            BitmapImage BI = new BitmapImage();
+            using (MemoryStream m = new MemoryStream(Barray))
+            {
+                BI.BeginInit();
+                BI.StreamSource = m;
+                BI.CacheOption = BitmapCacheOption.OnLoad;
+                BI.EndInit(); 
+            }
+            img.ImageSource = BI;
+        }
         public PersonalAccountPage(Employees User)
         {
             InitializeComponent();
@@ -77,6 +93,12 @@ namespace Airport
                 tbDivisionCode.Foreground = Brushes.Red;
                 tbDivisionCode.Text = "не задано";
             }
+            List<EmployeesPhoto> employeesPhotos = Base.BE.EmployeesPhoto.Where(x => x.id_employee == User.id_employee).ToList();
+            if (employeesPhotos != null)
+            {
+                byte[] Bar = employeesPhotos.FirstOrDefault(x => x.actual == true).photo_binary;
+                showImage(Bar, myImage);
+            }
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -105,9 +127,64 @@ namespace Airport
             Frameclass.MainFrame.Navigate(new PersonalAccountPage(User));
         }
 
-        private void btnChangeImage_Click(object sender, RoutedEventArgs e)
+        private void btnChangeImage_Click(object sender, RoutedEventArgs e) // Изменение аватарки
         {
+            try
+            {
+                EmployeesPhoto employeesPhoto = new EmployeesPhoto();
+                employeesPhoto.id_employee = User.id_employee;
+                OpenFileDialog OFD = new OpenFileDialog();
+                OFD.ShowDialog();            
+                string path = OFD.FileName;
+                System.Drawing.Image SDI = System.Drawing.Image.FromFile(path);
+                ImageConverter IC = new ImageConverter();
+                byte[] Barray = (byte[])IC.ConvertTo(SDI, typeof(byte[]));
+                employeesPhoto.photo_binary = Barray;
+                employeesPhoto.actual = true;
+                List<EmployeesPhoto> employeesPhotos = Base.BE.EmployeesPhoto.Where(x => x.id_employee == User.id_employee).ToList();
+                foreach (EmployeesPhoto photo in employeesPhotos)
+                {
+                    photo.actual = false;
+                }
+                Base.BE.EmployeesPhoto.Add(employeesPhoto);
+                Base.BE.SaveChanges();
+                MessageBox.Show("Фото добавлено");
+                Frameclass.MainFrame.Navigate(new PersonalAccountPage(User));
+            }
+            catch
+            {
+                MessageBox.Show("При добавлении нового фото возникла ошибка!");
+            }
+        }
 
+        private void btnChangeImages_Click(object sender, RoutedEventArgs e) // Добавление фото в базу
+        {
+            try
+            {
+                OpenFileDialog OFD = new OpenFileDialog();
+                OFD.Multiselect = true;
+                if (OFD.ShowDialog() == true)
+                {
+                    foreach (string file in OFD.FileNames)
+                    {
+                        EmployeesPhoto employeesPhoto = new EmployeesPhoto();
+                        employeesPhoto.id_employee = User.id_employee;
+                        string path = file;
+                        System.Drawing.Image SDI = System.Drawing.Image.FromFile(file);
+                        ImageConverter IC = new ImageConverter();
+                        byte[] Barray = (byte[])IC.ConvertTo(SDI, typeof(byte[]));
+                        employeesPhoto.photo_binary = Barray;
+                        employeesPhoto.actual = false;
+                        Base.BE.EmployeesPhoto.Add(employeesPhoto);
+                    }
+                    Base.BE.SaveChanges();
+                    MessageBox.Show("Фото добавлены");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("При добавлении нового фото возникла ошибка!");
+            }
         }
     }
 }

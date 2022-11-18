@@ -38,5 +38,6 @@ namespace Airport
         public virtual DbSet<Planes> Planes { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Routes> Routes { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

@@ -61,6 +61,7 @@
           <Property Name="id_employee" Type="int" Nullable="false" />
           <Property Name="photo_path" Type="nvarchar" MaxLength="100" />
           <Property Name="photo_binary" Type="varbinary(max)" />
+          <Property Name="actual" Type="bit" />
         </EntityType>
         <EntityType Name="Flights">
           <Key>
@@ -127,6 +128,16 @@
           <Property Name="id_departure_point" Type="int" Nullable="false" />
           <Property Name="id_arrival_point" Type="int" Nullable="false" />
           <Property Name="flight_duration" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_ApplicationOfDiscounts_Box_Offic">
           <End Role="Box_Offic" Type="Self.Box_Offic" Multiplicity="1">
@@ -342,6 +353,7 @@
           <EntitySet Name="Planes" EntityType="Self.Planes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Routes" EntityType="Self.Routes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ApplicationOfDiscounts_Box_Offic" Association="Self.FK_ApplicationOfDiscounts_Box_Offic">
             <End Role="Box_Offic" EntitySet="Box_Offic" />
             <End Role="ApplicationOfDiscounts" EntitySet="ApplicationOfDiscounts" />
@@ -421,6 +433,7 @@
           <EntitySet Name="Planes" EntityType="BaseDataModel.Planes" />
           <EntitySet Name="Roles" EntityType="BaseDataModel.Roles" />
           <EntitySet Name="Routes" EntityType="BaseDataModel.Routes" />
+          <EntitySet Name="sysdiagrams" EntityType="BaseDataModel.sysdiagrams" />
           <AssociationSet Name="FK_ApplicationOfDiscounts_Box_Offic" Association="BaseDataModel.FK_ApplicationOfDiscounts_Box_Offic">
             <End Role="Box_Offic" EntitySet="Box_Offic" />
             <End Role="ApplicationOfDiscounts" EntitySet="ApplicationOfDiscounts" />
@@ -552,6 +565,7 @@
           <Property Name="id_employee" Type="Int32" Nullable="false" />
           <Property Name="photo_path" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="photo_binary" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="actual" Type="Boolean" />
           <NavigationProperty Name="Employees" Relationship="BaseDataModel.FK_EmployeesPhoto_Employees" FromRole="EmployeesPhoto" ToRole="Employees" />
         </EntityType>
         <EntityType Name="Flights">
@@ -634,6 +648,16 @@
           <NavigationProperty Name="Citys" Relationship="BaseDataModel.FK_Routes_Citys" FromRole="Routes" ToRole="Citys" />
           <NavigationProperty Name="Citys1" Relationship="BaseDataModel.FK_Routes_Citys1" FromRole="Routes" ToRole="Citys" />
           <NavigationProperty Name="Flights" Relationship="BaseDataModel.FK_Flights_Routes" FromRole="Routes" ToRole="Flights" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="FK_ApplicationOfDiscounts_Box_Offic">
           <End Type="BaseDataModel.Box_Offic" Role="Box_Offic" Multiplicity="1">
@@ -897,6 +921,7 @@
           <EntitySetMapping Name="EmployeesPhoto">
             <EntityTypeMapping TypeName="BaseDataModel.EmployeesPhoto">
               <MappingFragment StoreEntitySet="EmployeesPhoto">
+                <ScalarProperty Name="actual" ColumnName="actual" />
                 <ScalarProperty Name="photo_binary" ColumnName="photo_binary" />
                 <ScalarProperty Name="photo_path" ColumnName="photo_path" />
                 <ScalarProperty Name="id_employee" ColumnName="id_employee" />
@@ -974,6 +999,17 @@
                 <ScalarProperty Name="id_arrival_point" ColumnName="id_arrival_point" />
                 <ScalarProperty Name="id_departure_point" ColumnName="id_departure_point" />
                 <ScalarProperty Name="id_route" ColumnName="id_route" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="BaseDataModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

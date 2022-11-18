@@ -12,14 +12,12 @@ namespace Airport
     using System;
     using System.Collections.Generic;
     
-    public partial class EmployeesPhoto
+    public partial class sysdiagrams
     {
-        public int id_photo { get; set; }
-        public int id_employee { get; set; }
-        public string photo_path { get; set; }
-        public byte[] photo_binary { get; set; }
-        public Nullable<bool> actual { get; set; }
-    
-        public virtual Employees Employees { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
