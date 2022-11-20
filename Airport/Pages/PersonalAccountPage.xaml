@@ -21,8 +21,8 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="7*"/>
-                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="11*"/>
+                    <RowDefinition Height="6*"/>
                 </Grid.RowDefinitions>
                 <Rectangle RadiusX="100" RadiusY="100" Height="350" Width="350">
                     <Rectangle.Fill>
@@ -33,7 +33,7 @@
                     <TextBlock x:Name="tbLogin" Text="Логин" HorizontalAlignment="Center" FontSize="28"/>
                     <Button x:Name="btnChangeImage" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Изменить аватарку" Width="300" Click="btnChangeImage_Click"/>
                     <Button x:Name="btnChangeImages" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Content="Добавить картинки в базу" Width="300" Click="btnChangeImages_Click" Cursor="Hand"/>
-                    <TextBlock x:Name="tbDeleteImage" Style="{StaticResource ResourceKey=TBNextRegistration}" HorizontalAlignment="Center" Text="Удалить картинку" Visibility="Collapsed"/>
+                    <TextBlock x:Name="tbDeleteImage" Style="{StaticResource ResourceKey=TBNextRegistration}" HorizontalAlignment="Center" Text="Удалить картинку" Visibility="Collapsed" MouseUp="tbDeleteImage_MouseUp"/>
                 </StackPanel>
             </Grid>
             <StackPanel Grid.Column="1">

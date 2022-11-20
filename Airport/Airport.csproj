@@ -145,7 +145,7 @@
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
-    <Compile Include="UpdAvatar.xaml.cs">
+    <Compile Include="Windows\UpdAvatar.xaml.cs">
       <DependentUpon>UpdAvatar.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\UpdPassportData.xaml.cs">
@@ -208,7 +208,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UpdAvatar.xaml">
+    <Page Include="Windows\UpdAvatar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -288,6 +288,7 @@
       <DependentUpon>BaseData.edmx</DependentUpon>
       <LastGenOutput>BaseData.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\icon_upd_avatar.png" />
     <Resource Include="Resources\upd_personal_account.png" />
     <Resource Include="Resources\icon_people.png" />
     <Resource Include="Resources\icon_updTicket.png" />

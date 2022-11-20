@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -94,10 +95,12 @@ namespace Airport
                 tbDivisionCode.Text = "не задано";
             }
             List<EmployeesPhoto> employeesPhotos = Base.BE.EmployeesPhoto.Where(x => x.id_employee == User.id_employee).ToList();
-            if (employeesPhotos != null)
+            employeesPhotos = employeesPhotos.Where(x => x.actual != false).ToList();
+            if (employeesPhotos.Count != 0)
             {
                 byte[] Bar = employeesPhotos.FirstOrDefault(x => x.actual == true).photo_binary;
                 showImage(Bar, myImage);
+                tbDeleteImage.Visibility = Visibility.Visible;
             }
         }
 
@@ -129,32 +132,34 @@ namespace Airport
 
         private void btnChangeImage_Click(object sender, RoutedEventArgs e) // Изменение аватарки
         {
-            try
+            UpdAvatar updAvatar = new UpdAvatar(User);
+            updAvatar.ShowDialog();
+            Frameclass.MainFrame.Navigate(new PersonalAccountPage(User));
+        }
+
+        bool GetFindingPhoto(byte[] Barray) // Проверка наличия фото в базе
+        {
+            List<EmployeesPhoto> photos = Base.BE.EmployeesPhoto.Where(x => x.id_employee == User.id_employee).ToList(); // Проверка, есть ли в базе уже данное фото у пользователя
+            foreach (EmployeesPhoto photo in photos)
             {
-                EmployeesPhoto employeesPhoto = new EmployeesPhoto();
-                employeesPhoto.id_employee = User.id_employee;
-                OpenFileDialog OFD = new OpenFileDialog();
-                OFD.ShowDialog();            
-                string path = OFD.FileName;
-                System.Drawing.Image SDI = System.Drawing.Image.FromFile(path);
-                ImageConverter IC = new ImageConverter();
-                byte[] Barray = (byte[])IC.ConvertTo(SDI, typeof(byte[]));
-                employeesPhoto.photo_binary = Barray;
-                employeesPhoto.actual = true;
-                List<EmployeesPhoto> employeesPhotos = Base.BE.EmployeesPhoto.Where(x => x.id_employee == User.id_employee).ToList();
-                foreach (EmployeesPhoto photo in employeesPhotos)
+                if (GetComparisonArray(photo.photo_binary, Barray)) // Если такое фото уже есть, то новое не добавляем, а устанавливаем старое
                 {
-                    photo.actual = false;
+                    return true;
                 }
-                Base.BE.EmployeesPhoto.Add(employeesPhoto);
-                Base.BE.SaveChanges();
-                MessageBox.Show("Фото добавлено");
-                Frameclass.MainFrame.Navigate(new PersonalAccountPage(User));
             }
-            catch
+            return false;
+        }
+
+        bool GetComparisonArray(byte[] array1, byte[] array2) // Сравнение двух картинок
+        {
+            for (int i = 0; i < array1.Length; i++)
             {
-                MessageBox.Show("При добавлении нового фото возникла ошибка!");
+                if (array1[i] != array2[i])
+                {
+                    return false;
+                }
             }
+            return true;
         }
 
         private void btnChangeImages_Click(object sender, RoutedEventArgs e) // Добавление фото в базу
@@ -167,15 +172,18 @@ namespace Airport
                 {
                     foreach (string file in OFD.FileNames)
                     {
-                        EmployeesPhoto employeesPhoto = new EmployeesPhoto();
-                        employeesPhoto.id_employee = User.id_employee;
                         string path = file;
                         System.Drawing.Image SDI = System.Drawing.Image.FromFile(file);
                         ImageConverter IC = new ImageConverter();
                         byte[] Barray = (byte[])IC.ConvertTo(SDI, typeof(byte[]));
-                        employeesPhoto.photo_binary = Barray;
-                        employeesPhoto.actual = false;
-                        Base.BE.EmployeesPhoto.Add(employeesPhoto);
+                        if(!GetFindingPhoto(Barray))
+                        {
+                            EmployeesPhoto employeesPhoto = new EmployeesPhoto();
+                            employeesPhoto.id_employee = User.id_employee;
+                            employeesPhoto.photo_binary = Barray;
+                            employeesPhoto.actual = false;
+                            Base.BE.EmployeesPhoto.Add(employeesPhoto);
+                        }
                     }
                     Base.BE.SaveChanges();
                     MessageBox.Show("Фото добавлены");
@@ -185,6 +193,17 @@ namespace Airport
             {
                 MessageBox.Show("При добавлении нового фото возникла ошибка!");
             }
+        }
+
+        private void tbDeleteImage_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            List<EmployeesPhoto> employeesPhotos = Base.BE.EmployeesPhoto.Where(x => x.id_employee == User.id_employee).ToList();
+            foreach (EmployeesPhoto employeePhoto in employeesPhotos)
+            {
+                employeePhoto.actual = false;
+            }
+            Base.BE.SaveChanges();
+            Frameclass.MainFrame.Navigate(new PersonalAccountPage(User));
         }
     }
 }
