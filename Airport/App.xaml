@@ -213,5 +213,12 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style.Setters>
         </Style>
+        <Style x:Key="imSidePictures" TargetType="Image">
+            <Style.Setters>
+                <Setter Property="Height" Value="240"/>
+                <Setter Property="Width" Value="240"/>
+                <Setter Property="Opacity" Value="0.2"/>
+            </Style.Setters>
+        </Style>
     </Application.Resources>
 </Application>
