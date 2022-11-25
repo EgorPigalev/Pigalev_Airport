@@ -30,6 +30,22 @@ namespace Airport
             InitializeComponent();
             this.User = User;
             lvListTickets.ItemsSource = Base.BE.Box_Offic.ToList();
+
+            List<Box_Offic> BT = Base.BE.Box_Offic.ToList();
+
+            List<Employees> employees = new List<Employees>(); // Список пользователей, которые совершали продажи
+
+            cmbEmployee.Items.Add("Все кассиры");
+            for (int i = 0; i < BT.Count; i++)
+            {
+                employees.Add(BT[i].Employees);
+            }
+            employees = employees.Distinct().ToList();
+            foreach(Employees employee in employees)
+            {
+                cmbEmployee.Items.Add(employee.FIO);
+            }
+            cmbEmployee.SelectedIndex = 0;
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)

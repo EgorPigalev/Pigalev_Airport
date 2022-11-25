@@ -9,14 +9,38 @@
       Title="ListOfTickets" Background="White" Margin="10" FontSize="18">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"></RowDefinition>
-            <RowDefinition Height="11*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="14*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
             <TextBlock Style="{StaticResource ResourceKey=tbHeader}">Список купленных билетов</TextBlock>
         </StackPanel>
-        <Grid Grid.Row="1">
+        <GroupBox Header="Модуль поиска" Grid.Row="1" Margin="10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Кассир" FontSize="22"/>
+                    <ComboBox Name="cmbEmployee" Width="200" Margin="10, 0, 0, 0"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Пассажир" FontSize="22"/>
+                    <TextBox Name="tbPassenger" Width="200" Margin="10, 0, 0, 0" MaxLength="50"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Только со скидками" FontSize="22"/>
+                    <CheckBox Name="cbStock"></CheckBox>
+                </StackPanel>
+                <Button Content="Найти" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Margin="10, 0, 0, 0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </GroupBox>
+        <Grid Grid.Row="2">
             <ListView x:Name="lvListTickets" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -85,15 +109,15 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
-        <StackPanel Grid.Row="2">
-            <StackPanel x:Name="spLegend" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 5, 0, 5">
-                <Image Style="{StaticResource ResourceKey=iIconHeader}" Source="../Resources/color_day_flight.png"/>
-                <TextBlock Text= " - Дневные рейсы     "/>
-                <Image Style="{StaticResource ResourceKey=iIconHeader}" Source="../Resources/color_night_flight.png"/>
-                <TextBlock Text= " - Ночные рейсы"/>
-            </StackPanel>
+        <StackPanel Grid.Row="3">
             <Grid>
-                <Button x:Name="btnExit" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Left" Click="btnExit_Click" Content="Назад" Cursor="Hand"/>
+                <Button x:Name="btnExit" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Left" Click="btnExit_Click" Content="Назад"/>
+                <StackPanel x:Name="spLegend" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0, 5, 0, 5">
+                    <Image Style="{StaticResource ResourceKey=iIconHeader}" Source="../Resources/color_day_flight.png"/>
+                    <TextBlock Text= " - Дневные рейсы     "/>
+                    <Image Style="{StaticResource ResourceKey=iIconHeader}" Source="../Resources/color_night_flight.png"/>
+                    <TextBlock Text= " - Ночные рейсы"/>
+                </StackPanel>
                 <Button x:Name="btnAdd" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" HorizontalAlignment="Right" Click="btnAdd_Click" Content="Добавить"/>
             </Grid>
         </StackPanel>
