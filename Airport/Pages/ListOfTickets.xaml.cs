@@ -24,6 +24,8 @@ namespace Airport
     /// </summary>
     public partial class ListOfTickets : Page
     {
+        PageChange pc = new PageChange();
+        List<Box_Offic> Box_OfficFilter = new List<Box_Offic>();
         Employees User;
         public ListOfTickets(Employees User)
         {
@@ -48,6 +50,10 @@ namespace Airport
             cmbEmployee.SelectedIndex = 0;
             cbNameField.SelectedIndex = 0;
             cbSortingDirection.SelectedIndex = 0;
+
+            Box_OfficFilter = Base.BE.Box_Offic.ToList();
+            pc.CountPage = Base.BE.Box_Offic.ToList().Count;
+            DataContext = pc;
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -211,6 +217,12 @@ namespace Airport
             }
 
             lvListTickets.ItemsSource = box_Offics;
+            Box_OfficFilter = box_Offics;
+
+            string str = txtPageCount.Text; // Меняем пагинацию
+            txtPageCount.Text = "";
+            txtPageCount.Text = str;
+
             if (box_Offics.Count == 0)
             {
                 MessageBox.Show("В базе данных отсутсвуют записи удовлетворяющие условиям!");
@@ -230,6 +242,46 @@ namespace Airport
         private void cbStock_Checked(object sender, RoutedEventArgs e)
         {
             Filter();
+        }
+        private void txtPageCount_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                pc.CountPage = Convert.ToInt32(txtPageCount.Text);
+            }
+            catch
+            {
+                pc.CountPage = Box_OfficFilter.Count;
+            }
+            pc.Countlist = Box_OfficFilter.Count;
+            lvListTickets.ItemsSource = Box_OfficFilter.Skip(0).Take(pc.CountPage).ToList();
+            pc.CurrentPage = 1;
+        }
+
+        private void GoPage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock tb = (TextBlock)sender;
+            switch (tb.Uid)
+            {
+                case "prev":
+                    pc.CurrentPage--;
+                    break;
+                case "next":
+                    pc.CurrentPage++;
+                    break;
+                default:
+                    pc.CurrentPage = Convert.ToInt32(tb.Text);
+                    break;
+            }
+            lvListTickets.ItemsSource = Box_OfficFilter.Skip(pc.CurrentPage * pc.CountPage - pc.CountPage).Take(pc.CountPage).ToList();
+        }
+
+        private void txtPageCount_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!(Char.IsDigit(e.Text, 0)))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

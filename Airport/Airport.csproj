@@ -105,6 +105,7 @@
     <Compile Include="Gender.cs">
       <DependentUpon>BaseData.tt</DependentUpon>
     </Compile>
+    <Compile Include="Classes\PageChange.cs" />
     <Compile Include="Pages\AddTickets.xaml.cs">
       <DependentUpon>AddTickets.xaml</DependentUpon>
     </Compile>
