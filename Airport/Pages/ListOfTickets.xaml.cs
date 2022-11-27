@@ -46,6 +46,8 @@ namespace Airport
                 cmbEmployee.Items.Add(employee.FIO);
             }
             cmbEmployee.SelectedIndex = 0;
+            cbNameField.SelectedIndex = 0;
+            cbSortingDirection.SelectedIndex = 0;
         }
 
         private void btnExit_Click(object sender, RoutedEventArgs e)
@@ -108,12 +110,126 @@ namespace Airport
             Frameclass.MainFrame.Navigate(new ListOfTickets(User));
         }
 
-        private void btnUpdate_Click(object sender, RoutedEventArgs e)
+        private void btnUpdate_Click(object sender, RoutedEventArgs e) 
         {
             Button btn = (Button)sender;
             int index = Convert.ToInt32(btn.Uid);
             Box_Offic ticket = Base.BE.Box_Offic.FirstOrDefault(x => x.id_ticket == index);
             Frameclass.MainFrame.Navigate(new AddTickets(ticket, User));
+        }
+
+        private int GetCountDiscount(int index) // Подсчет колличества скидок применённых к билету
+        {
+            List<ApplicationOfDiscounts> applicationOfDiscounts = Base.BE.ApplicationOfDiscounts.Where(x => x.id_ticket == index).ToList();
+            return applicationOfDiscounts.Count();
+        }
+
+        private int GetIdEmployee(string FIO) // Поиск id по FIO
+        {
+            List<Employees> employees = Base.BE.Employees.ToList();
+            foreach(Employees employee in employees)
+            {
+                if(employee.FIO == FIO)
+                {
+                    return employee.id_employee;
+                }
+            }
+            return 0;
+        }
+
+        void Filter()  // Метод для одновременной фильтрации, поиска и сортировки
+        {
+            List<Box_Offic> box_Offics = new List<Box_Offic>();
+
+            string employee = cmbEmployee.SelectedValue.ToString();
+            int index = GetIdEmployee(employee);
+
+            // поиск значений, удовлетворяющих условия фильтра
+            if (index != 0)
+            {
+                box_Offics = Base.BE.Box_Offic.Where(x => x.Employees.id_employee == index).ToList();
+            }
+            else  // если выбран пункт "Все кассиры", то сбрасываем фильтрацию
+            {
+                box_Offics = Base.BE.Box_Offic.ToList();
+            }
+
+            // поиск совпадений по ФИО пасажира
+            if (!string.IsNullOrWhiteSpace(tbPassenger.Text))  // если строка не пустая и если она не состоит из пробелов
+            {
+                box_Offics = box_Offics.Where(x => x.Passengers.FIO.ToLower().Contains(tbPassenger.Text.ToLower())).ToList();
+            }
+
+            // выбор элементов только со скидками
+            if (cbStock.IsChecked == true)
+            {
+                box_Offics = box_Offics.Where(x => GetCountDiscount(x.id_ticket) != 0).ToList();
+            }
+
+            // сортировка
+            switch (cbNameField.SelectedIndex)
+            {
+                case 1:
+                    {
+                        if(cbSortingDirection.SelectedIndex == 0)
+                        {
+                            box_Offics.Sort((x, y) => x.Passengers.FIO.CompareTo(y.Passengers.FIO));
+                        }
+                        else
+                        {
+                            box_Offics.Sort((x, y) => x.Passengers.FIO.CompareTo(y.Passengers.FIO));
+                            box_Offics.Reverse();
+                        }
+                    }
+                    break;
+                case 2:
+                    {
+                        if (cbSortingDirection.SelectedIndex == 0)
+                        {
+                            box_Offics.Sort((x, y) => x.date_of_sale.CompareTo(y.date_of_sale));
+                        }
+                        else
+                        {
+                            box_Offics.Sort((x, y) => x.date_of_sale.CompareTo(y.date_of_sale));
+                            box_Offics.Reverse();
+                        }
+                    }
+                    break;
+                case 3:
+                    {
+                        if (cbSortingDirection.SelectedIndex == 0)
+                        {
+                            box_Offics.Sort((x, y) => x.DepartureDate.CompareTo(y.DepartureDate));
+                        }
+                        else
+                        {
+                            box_Offics.Sort((x, y) => x.DepartureDate.CompareTo(y.DepartureDate));
+                            box_Offics.Reverse();
+                        }
+                    }
+                    break;
+            }
+
+            lvListTickets.ItemsSource = box_Offics;
+            if (box_Offics.Count == 0)
+            {
+                MessageBox.Show("В базе данных отсутсвуют записи удовлетворяющие условиям!");
+            }
+        }
+
+        private void cmbEmployee_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void tbPassenger_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Filter();
+        }
+
+        private void cbStock_Checked(object sender, RoutedEventArgs e)
+        {
+            Filter();
         }
     }
 }

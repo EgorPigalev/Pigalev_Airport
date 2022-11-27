@@ -42,7 +42,7 @@ namespace Airport
                         Frameclass.MainFrame.Navigate(new MainMenuPage(employees));
                         break;
                     case "Пользователь":
-                        Frameclass.MainFrame.Navigate(new MainMenuPage(employees));
+                        Frameclass.MainFrame.Navigate(new PersonalAccountPage(employees));
                         break;  
                     default:
                         MessageBox.Show("");

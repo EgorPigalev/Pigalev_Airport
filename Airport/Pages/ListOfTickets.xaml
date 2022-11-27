@@ -5,41 +5,52 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Airport"
       mc:Ignorable="d" 
-      d:DesignHeight="720" d:DesignWidth="1350"
+      d:DesignHeight="750" d:DesignWidth="1350"
       Title="ListOfTickets" Background="White" Margin="10" FontSize="18">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="2*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="4*"></RowDefinition>
             <RowDefinition Height="14*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
             <TextBlock Style="{StaticResource ResourceKey=tbHeader}">Список купленных билетов</TextBlock>
         </StackPanel>
-        <GroupBox Header="Модуль поиска" Grid.Row="1" Margin="10">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="Кассир" FontSize="22"/>
-                    <ComboBox Name="cmbEmployee" Width="200" Margin="10, 0, 0, 0"></ComboBox>
+        <StackPanel Grid.Row="1" Margin="10, 0, 10, 0">
+            <GroupBox Header="Модуль поиска">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Style="{StaticResource ResourceKey=spSearch}">
+                        <TextBlock Text="Кассир" FontSize="22"/>
+                        <ComboBox Name="cmbEmployee" Style="{StaticResource ResourceKey=cbSearch}" SelectionChanged="cmbEmployee_SelectionChanged"></ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Style="{StaticResource ResourceKey=spSearch}">
+                        <TextBlock Text="Пассажир" FontSize="22"/>
+                        <TextBox Name="tbPassenger" Width="300" Margin="10, 0, 0, 0" MaxLength="50" TextChanged="tbPassenger_TextChanged"></TextBox>
+                    </StackPanel>
+                    <CheckBox Name="cbStock" FontSize="22" Content="Только со скидками" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Checked="cbStock_Checked" Unchecked="cbStock_Checked"></CheckBox>
+                </Grid>
+            </GroupBox>
+            <GroupBox Header="Сортировка">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <ComboBox Name="cbNameField" Style="{StaticResource ResourceKey=cbSearch}" SelectionChanged="cmbEmployee_SelectionChanged">
+                        <ComboBoxItem>Без сортировки</ComboBoxItem>
+                        <ComboBoxItem>Пассажир</ComboBoxItem>
+                        <ComboBoxItem>Дата продажи</ComboBoxItem>
+                        <ComboBoxItem>Дата вылета</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox Name="cbSortingDirection" Style="{StaticResource ResourceKey=cbSearch}" SelectionChanged="cmbEmployee_SelectionChanged">
+                        <ComboBoxItem>По возростанию</ComboBoxItem>
+                        <ComboBoxItem>По убыванию</ComboBoxItem>
+                    </ComboBox>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="Пассажир" FontSize="22"/>
-                    <TextBox Name="tbPassenger" Width="200" Margin="10, 0, 0, 0" MaxLength="50"></TextBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="Только со скидками" FontSize="22"/>
-                    <CheckBox Name="cbStock"></CheckBox>
-                </StackPanel>
-                <Button Content="Найти" Template="{StaticResource CTButonMainPage}" Style="{StaticResource ResourceKey=btnMainButton}" Margin="10, 0, 0, 0" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            </Grid>
-        </GroupBox>
+            </GroupBox>
+        </StackPanel>
         <Grid Grid.Row="2">
             <ListView x:Name="lvListTickets" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ItemsPanel>

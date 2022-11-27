@@ -220,5 +220,18 @@
                 <Setter Property="Opacity" Value="0.2"/>
             </Style.Setters>
         </Style>
+        <Style x:Key="spSearch" TargetType="StackPanel">
+            <Style.Setters>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style.Setters>
+        </Style>
+        <Style x:Key="cbSearch" TargetType="ComboBox">
+            <Style.Setters>
+                <Setter Property="Width" Value="300"/>
+                <Setter Property="Margin" Value="10, 0, 0, 0"/>
+            </Style.Setters>
+        </Style>
     </Application.Resources>
 </Application>
