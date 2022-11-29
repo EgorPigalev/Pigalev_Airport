@@ -53,6 +53,8 @@ namespace Airport
 
             Box_OfficFilter = Base.BE.Box_Offic.ToList();
             pc.CountPage = Base.BE.Box_Offic.ToList().Count;
+            pc.VisibleButton[0] = "Hidden";
+            pc.VisibleButton[1] = "Hidden";
             DataContext = pc;
         }
 
@@ -282,6 +284,18 @@ namespace Airport
             {
                 e.Handled = true;
             }
+        }
+
+        private void txtNextFirst_MouseDown(object sender, MouseButtonEventArgs e) // Переход к первой странице
+        {
+            pc.CurrentPage = 1;
+            lvListTickets.ItemsSource = Box_OfficFilter.Skip(pc.CurrentPage * pc.CountPage - pc.CountPage).Take(pc.CountPage).ToList();
+        }
+
+        private void txtNextLast_MouseDown(object sender, MouseButtonEventArgs e) // Переход к последней странице
+        {
+            pc.CurrentPage = pc.CountPages;
+            lvListTickets.ItemsSource = Box_OfficFilter.Skip(pc.CurrentPage * pc.CountPage - pc.CountPage).Take(pc.CountPage).ToList();
         }
     }
 }

@@ -10,10 +10,13 @@ namespace Airport
     class PageChange : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        static int countButton = 2;
         static int countitems = 5;
         public int[] NPage { get; set; } = new int[countitems];
         public string[] Visible { get; set; } = new string[countitems];
         public string[] Bold { get; set; } = new string[countitems];
+        public string[] VisibleButton { get; set; } = new string[countButton];
+
         int countpages;
         public int CountPages
         {
@@ -96,11 +99,40 @@ namespace Airport
                     if (NPage[i] == currentpage) Bold[i] = "ExtraBold";
                     else Bold[i] = "Regular";
                 }
+
+                //Смена видимости для перемещения в самое начало и конец
+                if (countpages > 5)
+                {
+                    if (NPage[0] != 1)
+                    {
+                        VisibleButton[0] = "Visible";
+                    }
+                    else
+                    {
+                        VisibleButton[0] = "Hidden";
+                    }
+                    if (NPage[4] != countpages)
+                    {
+                        VisibleButton[1] = "Visible";
+                    }
+                    else
+                    {
+                        VisibleButton[1] = "Hidden";
+                    }
+                }
+                else
+                {
+                    VisibleButton[0] = "Hidden";
+                    VisibleButton[1] = "Hidden";
+                }
+
                 PropertyChanged(this, new PropertyChangedEventArgs("NPage"));
                 PropertyChanged(this, new PropertyChangedEventArgs("Visible"));
                 PropertyChanged(this, new PropertyChangedEventArgs("Bold"));
+                PropertyChanged(this, new PropertyChangedEventArgs("VisibleButton"));
             }
         }
+
         public PageChange()
         {
             for (int i = 0; i < countitems; i++)

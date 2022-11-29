@@ -240,5 +240,16 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style.Setters>
         </Style>
+        <Style x:Key="tbButtonPagination" TargetType="TextBlock">
+            <Style.Setters>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#FF1D6FB9">
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Application.Resources>
 </Application>
