@@ -45,13 +45,20 @@ namespace Airport
             set
             {
                 countpage = value;
-                if (Countlist % value == 0)
+                if(value != 0)
                 {
-                    CountPages = Countlist / value;
+                    if (Countlist % value == 0)
+                    {
+                        CountPages = Countlist / value;
+                    }
+                    else
+                    {
+                        CountPages = Countlist / value + 1;
+                    }
                 }
                 else
                 {
-                    CountPages = Countlist / value + 1;
+                    CountPages = 0;
                 }
             }
         }
@@ -63,13 +70,20 @@ namespace Airport
             set
             {
                 countlist = value;
-                if (value % CountPage == 0)
+                if (value != 0)
                 {
-                    CountPages = value / CountPage;
+                    if (value % CountPage == 0)
+                    {
+                        CountPages = value / CountPage;
+                    }
+                    else
+                    {
+                        CountPages = 1 + value / CountPage;
+                    }
                 }
                 else
                 {
-                    CountPages = 1 + value / CountPage;
+                    CountPages = 0;
                 }
             }
         }
